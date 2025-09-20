@@ -1,12 +1,8 @@
 const mongoose = require('mongoose');
 
-const postSchema = new mongoose.Schema({
-  caption: {
-    type: String,
-    trim: true,
-    maxlength: 2200
-  },
-  image: {
+const textPostSchema = new mongoose.Schema({
+  
+  text: {
     type: String,
     required: true
   },
@@ -35,4 +31,4 @@ const postSchema = new mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model("Post", postSchema);
+module.exports = mongoose.model("TextPost", textPostSchema);

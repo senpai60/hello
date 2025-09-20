@@ -57,11 +57,14 @@ app.use(async (req, res, next) => {
 const homeRouter = require("./routes/home");
 const profileRouter = require("./routes/profile");
 const authRouter = require("./routes/auth");
+const createPostRouter = require("./routes/createpost");
+
 
 
 app.use("/", homeRouter);
 app.use("/profile", profileRouter);
 app.use("/auth", authRouter);
+app.use("/createpost", createPostRouter);
 
 // Static files
 
