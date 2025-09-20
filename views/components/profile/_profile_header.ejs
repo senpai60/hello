@@ -1,0 +1,28 @@
+<div class="bg-zinc-800 rounded-lg shadow-md overflow-hidden mb-8">
+    <!-- Profile Banner -->
+    <div class="h-48 md:h-64 bg-cover bg-center" style="background-image: url('<%= user.banner %>')"></div>
+    
+    <!-- Profile Info -->
+    <div class="p-5">
+        <div class="flex flex-col sm:flex-row items-center sm:items-end -mt-20 sm:-mt-24">
+            <img src="<%= user.avatar %>" alt="<%= user.name %> avatar" class="w-32 h-32 rounded-full border-4 border-zinc-800">
+            <div class="sm:ml-6 mt-4 sm:mt-0 text-center sm:text-left   ">
+                <h1 class="text-3xl font-bold text-slate-100"><%= user.name %></h1>
+                <p class="text-slate-400">@<%= user.username %></p>
+            </div>
+            <div class="flex items-center space-x-2 mt-4 sm:mt-0 sm:ml-auto">
+                <button class="bg-zinc-700 hover:bg-slate-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200">Edit Profile</button>
+            </div>
+        </div>
+
+        <!-- Bio & Stats -->
+        <div class="mt-6">
+            <p class="text-slate-300 max-w-xl"><%= user.bio %></p>
+            <div class="flex items-center space-x-6 mt-4 text-slate-400">
+                <div><span class="font-bold text-slate-200"><%= user.stats.posts %></span> Posts</div>
+                <div><span class="font-bold text-slate-200"><%= user.stats.followers %></span> Followers</div>
+                <div><span class="font-bold text-slate-200"><%= user.stats.following %></span> Following</div>
+            </div>
+        </div>
+    </div>
+</div>

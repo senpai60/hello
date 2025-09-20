@@ -1,0 +1,59 @@
+<header class="bg-zinc-900/80 backdrop-blur-sm sticky top-0 z-50 border-b border-zinc-700">
+  <nav class="container mx-auto px-4 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      
+      <!-- Logo -->
+      <div class="flex-shrink-0">
+        <a href="/" class="flex items-center space-x-2">
+          <svg
+            class="h-8 w-8 text-indigo-400"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 21a9.004 9.004 0 008.5-6.027c0-1.15-.39-2.236-1.055-3.136A8.987 8.987 0 0012 11.55a8.987 8.987 0 00-7.445 4.337c-.666.9-1.055 1.986-1.055 3.136A9.004 9.004 0 0012 21zm-5-9.75h10"
+            />
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 3c2.755 0 5.198.832 7.035 2.184a.75.75 0 01-.22.22A8.967 8.967 0 0012 5.056a8.967 8.967 0 00-6.815.348.75.75 0 01-.22-.22C6.802 3.832 9.245 3 12 3z"
+            />
+          </svg>
+          <span class="text-2xl font-bold text-white">Plato</span>
+        </a>
+      </div>
+
+      <!-- Right side: login/logout + profile -->
+      <div class="flex items-center space-x-4">
+        <% if (user) { %>
+          <!-- Logout button -->
+          <form action="/auth/logout" method="POST">
+            <button
+              type="submit"
+              class="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded transition-colors"
+            >
+              Logout
+            </button>
+          </form>
+
+          <!-- Profile pic -->
+          <a href="/profile">
+            <img
+              src="<%= user.profilePic || 'https://placehold.co/40x40/4f46e5/ffffff?text=P' %>"
+              class="w-10 h-10 rounded-full object-cover border-2 border-zinc-700"
+            />
+          </a>
+        <% } else { %>
+          <!-- Login button -->
+          <a href="/auth/login" class="text-slate-300 hover:text-white transition-colors">Login</a>
+        <% } %>
+      </div>
+
+    </div>
+  </nav>
+</header>
