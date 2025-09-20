@@ -16,6 +16,7 @@
     </div>
   </div>
 
+  <% if (post.image) { %>
   <div class="mt-4 -mx-6 overflow-hidden rounded-xl">
     <div class="w-full max-h-[400px] bg-zinc-700 flex items-center justify-center" style="aspect-ratio: 4 / 3;">
       <img
@@ -25,6 +26,7 @@
       />
     </div>
   </div>
+  <% } %>
 
   <div class="mt-4 flex justify-between text-zinc-400 max-w-sm">
     <button class="flex items-center space-x-1 hover:text-pink-400 transition-colors">

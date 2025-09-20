@@ -1,7 +1,7 @@
 <div class="bg-zinc-800 p-6 rounded-2xl shadow-lg">
   <div class="flex items-start space-x-4">
     <img
-      src="<%= post.user.profilePic %>"
+      src="<%= post.user.profilePic ? post.user.profilePic : '/uploads/profilePics/default-avatar.png' %>"
       alt="User avatar"
       class="w-12 h-12 rounded-full"
     />
@@ -23,7 +23,7 @@
         <button class="hover:text-pink-500 transition-colors">
           <i class="fa-regular fa-heart"></i> <%= post.likes.length %>
         </button>
-        <button class="hover:text-sky-500 transition-colors">
+        <button class="hover:text-sky-400 transition-colors">
           <i class="fa-regular fa-bookmark"></i>
         </button>
       </div>

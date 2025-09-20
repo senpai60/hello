@@ -1,22 +1,22 @@
 const mongoose = require('mongoose');
 
 const postSchema = new mongoose.Schema({
-  content: { // Renamed from 'caption' for wider use
+  caption: { // 'content' ko 'caption' se replace kiya
     type: String,
     trim: true,
     maxlength: 2200 // insta caption limit
   },
   image: {
-    type: String, // AWS, Cloudinary or server URL
+    type: String, 
     default: null
   },
   videoUrl: {
-    type: String, // optional
+    type: String, 
     default: null
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    ref: "User", 
     required: true
   },
   likes: [
@@ -28,13 +28,13 @@ const postSchema = new mongoose.Schema({
   comments: [
     {
       user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-      text: { type: String, required: true }, // 'text' from post.js, 'comment' from textpost.js - unified as 'text'
+      text: { type: String, required: true }, 
       createdAt: { type: Date, default: Date.now }
     }
   ],
-  tags: [String],
+  tags: [String], 
   mentions: [
-    { type: mongoose.Schema.Types.ObjectId, ref: "User" }
+    { type: mongoose.Schema.Types.ObjectId, ref: "User" } 
   ],
   location: {
     type: String
