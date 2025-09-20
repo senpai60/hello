@@ -1,357 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Plato - Profile</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/style.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-    />
-    <title>Plato - Profile</title>
-    <style>
-      body {
-        font-family: "Inter", sans-serif;
-      }
-      /* Custom scrollbar for a more modern look */
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #18181b;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #3f3f46;
-        border-radius: 4px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #52525b;
-      }
-    </style>
-  </head>
+</head>
 
-  <body class="bg-zinc-950 text-slate-300">
-    <%- include('../components/_pop_links.ejs')  %>
-    <div id="pop-links-wrapper"></div>
-    <div id="app-wrapper">
-      <%- include('../components/_navbar.ejs')  %>
-      <main class="container mx-auto px-4 lg:px-8 py-8">
-        <header class="mb-8">
-          <div class="relative">
-            <img
-              class="h-48 md:h-64 w-full object-cover rounded-2xl"
-              src="<%= user.coverPhoto || 'https://images.unsplash.com/photo-1504805572947-34fad45aed93?q=80&w=2070&auto=format&fit=crop' %>"
-              alt="Cover Photo"
-            />
-            <div class="absolute -bottom-16 left-8">
-              <img
-                class="w-32 h-32 rounded-full object-cover border-4 border-zinc-900"
-                src="<%= user.profilePic || 'https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500' %>"
-                alt="Profile Picture"
-              />
-            </div>
-          </div>
-          <div class="mt-20 px-8 flex justify-between items-center">
-            <div>
-              <h1 class="text-3xl font-bold text-white">
-                <%= user.username %>
-              </h1>
-              <p class="text-zinc-400">
-                @<%= user.username.toLowerCase().replace(/\s/g, '_') %>
-              </p>
-            </div>
-            <div>
-              <button
-                id="edit-profile-btn"
-                class="bg-zinc-700 hover:bg-zinc-600 text-white font-semibold py-2 px-6 rounded-lg transition-colors"
-              >
-                Edit Profile
-              </button>
-            </div>
-          </div>
-        </header>
+<body class="bg-gradient-to-br from-gray-900 via-gray-900 to-black text-gray-100 min-h-screen">
+    <%- include('../components/_navbar.ejs')  %>
+    <main class="pt-16">
+        <%- include('../components/profile/_profile_header_new.ejs', { user: user }) %>
 
-        <div class="grid grid-cols-12 gap-8">
-          <div class="col-span-12 lg:col-span-8">
-            <div class="space-y-6">
-              
-              <% if(posts.length === 0) { %>
-                <p class="text-zinc-400">You haven't posted anything yet.</p>
-              <% } %> 
-              <% posts.forEach(post => { %>
-                <% if(post.image) { %>
-                  <%- include('../components/_image_posts', { post: post, user: user }) %>
-                <% } else { %>
-                  <%- include('../components/_text_posts', { post: post, user: user }) %>
-                <% } %>
-              <% }); %>
-            </div>
-          </div>
-
-          <aside class="col-span-12 lg:col-span-4">
-            <div class="sticky top-24 space-y-6">
-              <div class="bg-zinc-800 p-6 rounded-2xl shadow-lg">
-                <h3 class="text-xl font-bold text-white mb-4">About</h3>
-                <p class="mb-4 text-zinc-300">
-                  <%= user.bio || 'No bio added yet.' %>
-                </p>
-                <ul class="space-y-3 text-zinc-400">
-                  <li class="flex items-center space-x-3">
-                    <i class="fa-solid fa-location-dot w-4 text-center"></i>
-                    <span><%= user.location || 'Unknown' %></span>
-                  </li>
-                  <% if(user.website){ %>
-                  <li class="flex items-center space-x-3">
-                    <i class="fa-solid fa-link w-4 text-center"></i>
-                    <a
-                      href="<%= user.website %>"
-                      class="text-blue-400 hover:underline"
-                      ><%= user.website %></a
-                    >
-                  </li>
-                  <% } %>
-                  <li class="flex items-center space-x-3">
-                    <i class="fa-regular fa-calendar w-4 text-center"></i>
-                    <span
-                      >Joined <%= new
-                      Date(user.createdAt).toLocaleString('default', { month:
-                      'long', year: 'numeric' }) %></span
-                    >
-                  </li>
-                </ul>
-                <div class="mt-6 flex space-x-4 text-zinc-300">
-                  <span><strong><%= user.stats.posts %></strong> Posts</span>
-                  <span><strong><%= user.stats.followers %></strong>
-                    Followers</span
-                  >
-                  <span><strong><%= user.stats.following %></strong>
-                    Following</span
-                  >
-                </div>
-              </div>
-            </div>
-          </aside>
+        <div class="px-4 sm:px-6 lg:px-8 mt-8">
+            <%- include('../components/profile/_profile_stats_cards.ejs', { user: user }) %>
         </div>
-      </main>
+
+        <div class="px-4 sm:px-6 lg:px-8 mt-8">
+            <%- include('../components/profile/_profile_tabs.ejs') %>
+        </div>
+
+        <div class="px-4 sm:px-6 lg:px-8 pb-24">
+            <div class="space-y-6" id="posts-container">
+                <% if(posts.length === 0) { %>
+                    <div class="text-center py-12 fade-in" id="empty-state">
+                        <div class="w-20 h-20 mx-auto mb-4 bg-gray-800 rounded-full flex items-center justify-center">
+                            <i class="ri-chat-3-line text-2xl text-gray-500"></i>
+                        </div>
+                        <h3 class="text-lg font-medium text-gray-300 mb-2">No posts yet</h3>
+                        <p class="text-gray-500">Share your first thought to get started!</p>
+                    </div>
+                <% } %>
+                <% posts.forEach(post => { %>
+                    <%- include('../components/_post_card_new', { post: post }) %>
+                <% }); %>
+            </div>
+        </div>
+    </main>
+
+    <div id="edit-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden">
+        <div id="modal-content" class="glass-effect bg-white/10 dark:bg-zinc-800/90 rounded-2xl p-6 w-full max-w-lg shadow-2xl transform scale-95 opacity-0 max-h-[90vh] overflow-y-auto border border-gray-700/30">
+            <form action="/profile/update" method="POST" enctype="multipart/form-data">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold text-white">Edit Profile</h2>
+                    <button type="button" id="close-modal-btn" class="text-gray-400 hover:text-white p-2 rounded-full hover:bg-gray-700/50 transition-all">
+                        <i class="ri-close-line text-xl"></i>
+                    </button>
+                </div>
+
+                <div class="relative mb-8">
+                    <div class="w-full h-32 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 rounded-xl relative overflow-hidden group">
+                        <img id="cover-preview" src="<%= user.coverPhoto || 'https://images.unsplash.com/photo-1504805572947-34fad45aed93?q=80&w=2070&auto=format&fit=crop' %>" class="w-full h-full object-cover opacity-80 mix-blend-overlay" alt="Cover preview" />
+                        <label for="cover-photo" class="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
+                            <i class="ri-camera-line text-2xl text-white"></i>
+                            <input type="file" id="cover-photo" name="coverPhoto" class="hidden" accept="image/*" />
+                        </label>
+                    </div>
+
+                    <div class="absolute -bottom-6 left-4 w-20 h-20 rounded-full p-1 bg-gradient-to-r from-blue-500 to-purple-600 group">
+                        <img id="profile-preview" src="<%= user.profilePic || 'https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500' %>" class="w-full h-full object-cover rounded-full bg-gray-800" alt="Profile preview" />
+                        <label for="profile-pic" class="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer rounded-full">
+                            <i class="ri-camera-line text-white"></i>
+                            <input type="file" id="profile-pic" name="profilePic" class="hidden" accept="image/*" />
+                        </label>
+                    </div>
+                </div>
+
+                <div class="space-y-4 mt-8">
+                    <div>
+                        <label for="username" class="block text-sm font-medium text-gray-300 mb-2">Username</label>
+                        <input type="text" name="username" id="username" value="<%= user.username %>" class="w-full bg-gray-800/50 border border-gray-700/50 text-white rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-transparent backdrop-blur-sm transition-all" />
+                    </div>
+                    <div>
+                        <label for="bio" class="block text-sm font-medium text-gray-300 mb-2">Bio</label>
+                        <textarea name="bio" id="bio" rows="3" class="w-full bg-gray-800/50 border border-gray-700/50 text-white rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-transparent backdrop-blur-sm resize-none transition-all" placeholder="Tell us about yourself..."><%= user.bio || '' %></textarea>
+                    </div>
+                    <div>
+                        <label for="location" class="block text-sm font-medium text-gray-300 mb-2">Location</label>
+                        <input type="text" name="location" id="location" value="<%= user.location || '' %>" class="w-full bg-gray-800/50 border border-gray-700/50 text-white rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-transparent backdrop-blur-sm transition-all" />
+                    </div>
+                    <div>
+                        <label for="website" class="block text-sm font-medium text-gray-300 mb-2">Website</label>
+                        <input type="url" name="website" id="website" value="<%= user.website || '' %>" placeholder="https://yourwebsite.com" class="w-full bg-gray-800/50 border border-gray-700/50 text-white rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-transparent backdrop-blur-sm transition-all" />
+                    </div>
+                </div>
+
+                <div class="flex justify-end space-x-3 mt-8 pt-6 border-t border-gray-700/30">
+                    <button type="button" id="cancel-btn" class="px-6 py-3 rounded-xl font-medium text-gray-300 bg-gray-700/50 hover:bg-gray-600/50 focus:outline-none focus:ring-2 focus:ring-gray-500/50 backdrop-blur-sm transition-all">
+                        Cancel
+                    </button>
+                    <button type="submit" class="px-8 py-3 rounded-xl font-semibold text-white bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transform hover:scale-105 transition-all">
+                        Save Changes
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
-
-    <div
-      id="edit-modal"
-      class="fixed inset-0 bg-black/70 flex items-center justify-center p-4 z-50 hidden"
-    >
-      <div
-        id="modal-content"
-        class="bg-zinc-800 w-full max-w-2xl rounded-2xl shadow-2xl p-8 transform scale-95 opacity-0"
-      >
-        <form
-          action="/profile/update"
-          method="POST"
-          enctype="multipart/form-data"
-        >
-          <div class="flex justify-between items-center mb-6">
-            <h2 class="text-2xl font-bold text-white">Edit Profile</h2>
-            <button
-              type="button"
-              id="close-modal-btn"
-              class="text-zinc-400 hover:text-white transition-colors"
-            >
-              <i class="fa-solid fa-xmark fa-lg"></i>
-            </button>
-          </div>
-
-          <div class="relative mb-12">
-            <div class="w-full h-40 bg-zinc-700 rounded-xl">
-              <img
-                id="cover-preview"
-                src="<%= user.coverPhoto || 'https://images.unsplash.com/photo-1504805572947-34fad45aed93?q=80&w=2070&auto=format&fit=crop' %>"
-                class="w-full h-full object-cover rounded-xl"
-                alt="Cover photo preview"
-              />
-            </div>
-            <label
-              for="cover-photo"
-              class="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 hover:opacity-100 transition-opacity cursor-pointer rounded-xl"
-            >
-              <i class="fa-solid fa-camera fa-2x text-white"></i>
-              <input
-                type="file"
-                id="cover-photo"
-                name="coverPhoto"
-                class="hidden"
-                accept="image/*"
-              />
-            </label>
-
-            <div
-              class="absolute -bottom-10 left-6 w-24 h-24 rounded-full bg-zinc-700 border-4 border-zinc-800"
-            >
-              <img
-                id="profile-preview"
-                src="<%= user.profilePic || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=1780&auto=format&fit=crop' %>"
-                class="w-full h-full object-cover rounded-full"
-                alt="Profile picture preview"
-              />
-              <label
-                for="profile-pic"
-                class="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 hover:opacity-100 transition-opacity cursor-pointer rounded-full"
-              >
-                <i class="fa-solid fa-camera text-white"></i>
-                <input
-                  type="file"
-                  id="profile-pic"
-                  name="profilePic"
-                  class="hidden"
-                  accept="image/*"
-                />
-              </label>
-            </div>
-          </div>
-
-          <div class="space-y-6">
-            <div>
-              <label
-                for="username"
-                class="block text-sm font-medium text-zinc-400 mb-1"
-                >Username</label
-              >
-              <input
-                type="text"
-                name="username"
-                id="username"
-                value="<%= user.username %>"
-                class="w-full bg-zinc-700 border border-zinc-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-blue-500 outline-none transition"
-              />
-            </div>
-            <div>
-              <label
-                for="bio"
-                class="block text-sm font-medium text-zinc-400 mb-1"
-                >Bio</label
-              >
-              <textarea
-                name="bio"
-                id="bio"
-                rows="3"
-                class="w-full bg-zinc-700 border border-zinc-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-blue-500 outline-none transition"
-              >
-<%= user.bio || '' %></textarea
-              >
-            </div>
-            <div>
-              <label
-                for="location"
-                class="block text-sm font-medium text-zinc-400 mb-1"
-                >Location</label
-              >
-              <input
-                type="text"
-                name="location"
-                id="location"
-                value="<%= user.location || '' %>"
-                class="w-full bg-zinc-700 border border-zinc-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-blue-500 outline-none transition"
-              />
-            </div>
-            <div>
-              <label
-                for="website"
-                class="block text-sm font-medium text-zinc-400 mb-1"
-                >Website</label
-              >
-              <input
-                type="url"
-                name="website"
-                id="website"
-                value="<%= user.website || '' %>"
-                class="w-full bg-zinc-700 border border-zinc-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-blue-500 outline-none transition"
-              />
-            </div>
-          </div>
-
-          <div class="mt-8 flex justify-end space-x-4">
-            <button
-              type="button"
-              id="cancel-btn"
-              class="bg-zinc-600 hover:bg-zinc-500 text-white font-semibold py-2 px-6 rounded-lg transition-colors"
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              class="bg-blue-600 hover:bg-blue-500 text-white font-semibold py-2 px-6 rounded-lg transition-colors"
-            >
-              Save Changes
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
+    <%- include('../components/_pop_links.ejs') %>
     <script src="/js/script.js"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const editProfileBtn = document.getElementById("edit-profile-btn");
-        const editModal = document.getElementById("edit-modal");
-        const modalContent = document.getElementById("modal-content");
-        const closeModalBtn = document.getElementById("close-modal-btn");
-        const cancelBtn = document.getElementById("cancel-btn");
-
-        const popLinksWrapper = document.getElementById("pop-links-wrapper");
-
-        const profilePicInput = document.getElementById("profile-pic");
-        const profilePreview = document.getElementById("profile-preview");
-        const coverPhotoInput = document.getElementById("cover-photo");
-        const coverPreview = document.getElementById("cover-preview");
-
-        const tl = gsap.timeline({ paused: true });
-        tl.to(editModal, {
-          duration: 0.3,
-          autoAlpha: 1,
-          ease: "power2.inOut",
-        }).to(
-          modalContent,
-          { duration: 0.3, scale: 1, opacity: 1, ease: "back.out(1.7)" },
-          "-=0.2"
-        );
-        const openModal = () => {
-          editModal.classList.remove("hidden");
-          tl.play();
-          popLinksWrapper.style.display = "none";
-        };
-        const closeModal = () => {
-          tl.reverse();
-          setTimeout(() => {
-            if (!tl.isActive()) editModal.classList.add("hidden");
-            popLinksWrapper.style.display = "block";
-          }, 500);
-        };
-
-        editProfileBtn.addEventListener("click", openModal);
-        closeModalBtn.addEventListener("click", closeModal);
-        cancelBtn.addEventListener("click", closeModal);
-        editModal.addEventListener("click", (e) => {
-          if (e.target === editModal) closeModal();
-        });
-        const createPreview = (input, preview) => {
-          input.addEventListener("change", (event) => {
-            const file = event.target.files[0];
-            if (file) {
-              const reader = new FileReader();
-              reader.onload = (e) => (preview.src = e.target.result);
-              reader.readAsDataURL(file);
-            }
-          });
-        };
-
-        createPreview(profilePicInput, profilePreview);
-        createPreview(coverPhotoInput, coverPreview);
-      });
-    </script>
-  </body>
+</body>
 </html>

@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plato - Profile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        body { font-family: "Inter", sans-serif; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #374151; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #4b5563; }
+        
+        .glass-effect {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .hover-lift {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .profile-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .stats-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-to-br from-gray-900 via-gray-900 to-black text-gray-100 min-h-screen">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass-effect border-b border-gray-800/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <button onclick="history.back()" class="w-8 h-8 rounded-full bg-gray-800/50 flex items-center justify-center hover:bg-gray-700/50 transition-colors">
+                        <i class="ri-arrow-left-line text-gray-300"></i>
+                    </button>
+                    <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-sm">P</span>
+                    </div>
+                    <span class="text-xl font-semibold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                        Plato
+                    </span>
+                </div>
+                
+                <div class="flex items-center space-x-3">
+                    <button class="w-8 h-8 bg-gray-800/50 rounded-full flex items-center justify-center hover:bg-gray-700/50 transition-colors">
+                        <i class="ri-more-line text-gray-300"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-16">
+        <!-- Profile Header -->
+        <div class="relative">
+            <!-- Cover Photo -->
+            <div class="h-48 sm:h-56 md:h-64 lg:h-72 relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600">
+                    <img
+                        class="w-full h-full object-cover opacity-80 mix-blend-overlay"
+                        src="https://images.unsplash.com/photo-1504805572947-34fad45aed93?q=80&w=2070&auto=format&fit=crop"
+                        alt="Cover Photo"
+                    />
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+            </div>
+            
+            <!-- Profile Info Card -->
+            <div class="px-4 sm:px-6 lg:px-8 -mt-12 relative z-10">
+                <div class="glass-effect rounded-2xl p-6 sm:p-8 fade-in">
+                    <div class="flex flex-col sm:flex-row items-start sm:items-end space-y-4 sm:space-y-0 sm:space-x-6">
+                        <!-- Profile Picture -->
+                        <div class="relative">
+                            <div class="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full p-1 bg-gradient-to-r from-blue-500 to-purple-600">
+                                <img
+                                    class="w-full h-full rounded-full object-cover bg-gray-800"
+                                    src="https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                                    alt="Profile Picture"
+                                />
+                            </div>
+                            <div class="absolute -bottom-1 -right-1 w-8 h-8 bg-green-500 rounded-full border-4 border-gray-900 flex items-center justify-center">
+                                <div class="w-2 h-2 bg-white rounded-full"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- User Info -->
+                        <div class="flex-1 min-w-0">
+                            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                                <div class="mb-4 sm:mb-0">
+                                    <h1 class="text-2xl sm:text-3xl font-bold text-white mb-1">
+                                        John Doe
+                                    </h1>
+                                    <p class="text-gray-400 text-sm sm:text-base mb-2">
+                                        @johndoe
+                                    </p>
+                                    <div class="flex items-center space-x-4 text-sm text-gray-400">
+                                        <div class="flex items-center space-x-1">
+                                            <i class="ri-map-pin-line text-xs"></i>
+                                            <span>San Francisco</span>
+                                        </div>
+                                        <div class="flex items-center space-x-1">
+                                            <i class="ri-calendar-line text-xs"></i>
+                                            <span>Joined March 2023</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Edit Button -->
+                                <button
+                                    id="edit-profile-btn"
+                                    class="bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium px-6 py-2.5 rounded-xl hover:from-blue-600 hover:to-purple-700 transition-all transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+                                >
+                                    <i class="ri-edit-line mr-2"></i>
+                                    Edit Profile
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Bio -->
+                    <div class="mt-6 pt-6 border-t border-gray-700/30">
+                        <p class="text-gray-300 leading-relaxed text-sm sm:text-base">
+                            Passionate developer and designer creating beautiful digital experiences. Love exploring new technologies and sharing knowledge with the community. ✨
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="px-4 sm:px-6 lg:px-8 mt-8">
+            <div class="grid grid-cols-3 gap-4">
+                <div class="stats-card rounded-xl p-4 text-center hover-lift fade-in">
+                    <div class="text-2xl font-bold text-white mb-1">42</div>
+                    <div class="text-sm text-gray-400">Posts</div>
+                </div>
+                <div class="stats-card rounded-xl p-4 text-center hover-lift fade-in">
+                    <div class="text-2xl font-bold text-white mb-1">1.2K</div>
+                    <div class="text-sm text-gray-400">Followers</div>
+                </div>
+                <div class="stats-card rounded-xl p-4 text-center hover-lift fade-in">
+                    <div class="text-2xl font-bold text-white mb-1">834</div>
+                    <div class="text-sm text-gray-400">Following</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Tabs -->
+        <div class="px-4 sm:px-6 lg:px-8 mt-8">
+            <div class="glass-effect rounded-2xl p-2 mb-8 fade-in">
+                <div class="flex space-x-2">
+                    <button class="flex-1 py-3 px-4 rounded-xl bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-white font-medium text-sm transition-all" id="posts-tab">
+                        <i class="ri-image-line mr-2"></i>
+                        Posts
+                    </button>
+                    <button class="flex-1 py-3 px-4 rounded-xl text-gray-400 font-medium text-sm hover:text-white hover:bg-gray-800/30 transition-all" id="media-tab">
+                        <i class="ri-play-circle-line mr-2"></i>
+                        Media
+                    </button>
+                    <button class="flex-1 py-3 px-4 rounded-xl text-gray-400 font-medium text-sm hover:text-white hover:bg-gray-800/30 transition-all" id="likes-tab">
+                        <i class="ri-heart-line mr-2"></i>
+                        Likes
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Posts Grid -->
+        <div class="px-4 sm:px-6 lg:px-8 pb-24">
+            <div class="space-y-6" id="posts-container">
+                <!-- Sample Post 1 -->
+                <article class="glass-effect rounded-2xl p-6 hover-lift fade-in">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center flex-shrink-0">
+                            <span class="text-white font-semibold text-sm">JD</span>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center space-x-2 mb-2">
+                                <h3 class="font-semibold text-gray-200">John Doe</h3>
+                                <span class="text-gray-500 text-sm">@johndoe</span>
+                                <span class="text-gray-600 text-sm">·</span>
+                                <span class="text-gray-500 text-sm">2h</span>
+                            </div>
+                            <p class="text-gray-300 leading-relaxed mb-4">
+                                Just finished an amazing book on philosophy. The way ancient thinkers approached complex problems still resonates today. What's everyone reading lately? 📚
+                            </p>
+                            <div class="flex items-center space-x-6">
+                                <button class="flex items-center space-x-2 text-gray-500 hover:text-blue-400 transition-colors group">
+                                    <div class="w-8 h-8 rounded-full group-hover:bg-blue-500/10 flex items-center justify-center transition-colors">
+                                        <i class="ri-message-3-line text-sm"></i>
+                                    </div>
+                                    <span class="text-sm">12</span>
+                                </button>
+                                <button class="flex items-center space-x-2 text-gray-500 hover:text-green-400 transition-colors group">
+                                    <div class="w-8 h-8 rounded-full group-hover:bg-green-500/10 flex items-center justify-center transition-colors">
+                                        <i class="ri-repeat-line text-sm"></i>
+                                    </div>
+                                    <span class="text-sm">5</span>
+                                </button>
+                                <button class="flex items-center space-x-2 text-gray-500 hover:text-red-400 transition-colors group">
+                                    <div class="w-8 h-8 rounded-full group-hover:bg-red-500/10 flex items-center justify-center transition-colors">
+                                        <i class="ri-heart-line text-sm"></i>
+                                    </div>
+                                    <span class="text-sm">24</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Sample Post with Image -->
+                <article class="glass-effect rounded-2xl p-6 hover-lift fade-in">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-green-500 to-teal-500 rounded-full flex items-center justify-center flex-shrink-0">
+                            <span class="text-white font-semibold text-sm">JD</span>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center space-x-2 mb-2">
+                                <h3 class="font-semibold text-gray-200">John Doe</h3>
+                                <span class="text-gray-500 text-sm">@johndoe</span>
+                                <span class="text-gray-600 text-sm">·</span>
+                                <span class="text-gray-500 text-sm">4h</span>
+                            </div>
+                            <p class="text-gray-300 leading-relaxed mb-4">
+                                Beautiful sunset today! Sometimes the simple moments are the most profound. ✨
+                            </p>
+                            <div class="rounded-xl overflow-hidden mb-4">
+                                <div class="w-full h-64 bg-gradient-to-br from-orange-400 via-pink-500 to-purple-600 flex items-center justify-center">
+                                    <i class="ri-image-line text-white text-4xl opacity-50"></i>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-6">
+                                <button class="flex items-center space-x-2 text-gray-500 hover:text-blue-400 transition-colors group">
+                                    <div class="w-8 h-8 rounded-full group-hover:bg-blue-500/10 flex items-center justify-center transition-colors">
+                                        <i class="ri-message-3-line text-sm"></i>
+                                    </div>
+                                    <span class="text-sm">8</span>
+                                </button>
+                                <button class="flex items-center space-x-2 text-gray-500 hover:text-green-400 transition-colors group">
+                                    <div class="w-8 h-8 rounded-full group-hover:bg-green-500/10 flex items-center justify-center transition-colors">
+                                        <i class="ri-repeat-line text-sm"></i>
+                                    </div>
+                                    <span class="text-sm">3</span>
+                                </button>
+                                <button class="flex items-center space-x-2 text-gray-500 hover:text-red-400 transition-colors group">
+                                    <div class="w-8 h-8 rounded-full group-hover:bg-red-500/10 flex items-center justify-center transition-colors">
+                                        <i class="ri-heart-line text-sm"></i>
+                                    </div>
+                                    <span class="text-sm">42</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Empty State -->
+                <div class="text-center py-12 fade-in" id="empty-state" style="display: none;">
+                    <div class="w-20 h-20 mx-auto mb-4 bg-gray-800 rounded-full flex items-center justify-center">
+                        <i class="ri-chat-3-line text-2xl text-gray-500"></i>
+                    </div>
+                    <h3 class="text-lg font-medium text-gray-300 mb-2">No posts yet</h3>
+                    <p class="text-gray-500">Share your first thought to get started!</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Edit Profile Modal -->
+    <div id="edit-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden">
+        <div id="modal-content" class="glass-effect bg-white/10 dark:bg-zinc-800/90 rounded-2xl p-6 w-full max-w-lg shadow-2xl transform scale-95 opacity-0 max-h-[90vh] overflow-y-auto border border-gray-700/30">
+            <form action="/profile/update" method="POST" enctype="multipart/form-data">
+                <!-- Modal Header -->
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold text-white">Edit Profile</h2>
+                    <button type="button" id="close-modal-btn" class="text-gray-400 hover:text-white p-2 rounded-full hover:bg-gray-700/50 transition-all">
+                        <i class="ri-close-line text-xl"></i>
+                    </button>
+                </div>
+
+                <!-- Cover & Profile Photos -->
+                <div class="relative mb-8">
+                    <div class="w-full h-32 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 rounded-xl relative overflow-hidden group">
+                        <img id="cover-preview" src="https://images.unsplash.com/photo-1504805572947-34fad45aed93?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover opacity-80 mix-blend-overlay" alt="Cover preview" />
+                        <label for="cover-photo" class="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
+                            <i class="ri-camera-line text-2xl text-white"></i>
+                            <input type="file" id="cover-photo" name="coverPhoto" class="hidden" accept="image/*" />
+                        </label>
+                    </div>
+                    
+                    <div class="absolute -bottom-6 left-4 w-20 h-20 rounded-full p-1 bg-gradient-to-r from-blue-500 to-purple-600 group">
+                        <img id="profile-preview" src="https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" class="w-full h-full object-cover rounded-full bg-gray-800" alt="Profile preview" />
+                        <label for="profile-pic" class="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer rounded-full">
+                            <i class="ri-camera-line text-white"></i>
+                            <input type="file" id="profile-pic" name="profilePic" class="hidden" accept="image/*" />
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Form Fields -->
+                <div class="space-y-4 mt-8">
+                    <div>
+                        <label for="username" class="block text-sm font-medium text-gray-300 mb-2">Username</label>
+                        <input type="text" name="username" id="username" value="John Doe" class="w-full bg-gray-800/50 border border-gray-700/50 text-white rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-transparent backdrop-blur-sm transition-all" />
+                    </div>
+                    
+                    <div>
+                        <label for="bio" class="block text-sm font-medium text-gray-300 mb-2">Bio</label>
+                        <textarea name="bio" id="bio" rows="3" class="w-full bg-gray-800/50 border border-gray-700/50 text-white rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-transparent backdrop-blur-sm resize-none transition-all" placeholder="Tell us about yourself...">Passionate developer and designer creating beautiful digital experiences.</textarea>
+                    </div>
+                    
+                    <div>
+                        <label for="location" class="block text-sm font-medium text-gray-300 mb-2">Location</label>
+                        <input type="text" name="location" id="location" value="San Francisco" class="w-full bg-gray-800/50 border border-gray-700/50 text-white rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-transparent backdrop-blur-sm transition-all" />
+                    </div>
+                    
+                    <div>
+                        <label for="website" class="block text-sm font-medium text-gray-300 mb-2">Website</label>
+                        <input type="url" name="website" id="website" value="" placeholder="https://yourwebsite.com" class="w-full bg-gray-800/50 border border-gray-700/50 text-white rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-transparent backdrop-blur-sm transition-all" />
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex justify-end space-x-3 mt-8 pt-6 border-t border-gray-700/30">
+                    <button type="button" id="cancel-btn" class="px-6 py-3 rounded-xl font-medium text-gray-300 bg-gray-700/50 hover:bg-gray-600/50 focus:outline-none focus:ring-2 focus:ring-gray-500/50 backdrop-blur-sm transition-all">
+                        Cancel
+                    </button>
+                    <button type="submit" class="px-8 py-3 rounded-xl font-semibold text-white bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transform hover:scale-105 transition-all">
+                        Save Changes
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Floating Bottom Navigation -->
+    <div class="fixed left-1/2 bottom-4 -translate-x-1/2 z-[1000] flex space-x-3">
+        <div class="flex bg-white w-fit px-1.25 py-1.25 shadow-box-up rounded-2xl dark:bg-zinc-800 dark:shadow-box-dark-out glass-effect">
+            <div class="dark:shadow-buttons-box-dark rounded-2xl w-full px-1.5 py-1.5 md:px-3 md:py-3">
+                <button onclick="window.location.href='/'" title="Go to the home page" class="text-gray-500 hover:text-blue-400 dark:text-gray-400 border-2 inline-flex items-center mr-4 last-of-type:mr-0 p-2.5 border-transparent bg-gray-200/50 shadow-button-flat-nopressed hover:border-2 hover:shadow-button-flat-pressed focus:opacity-100 focus:outline-none active:border-2 active:shadow-button-flat-pressed font-medium rounded-full text-sm text-center dark:bg-zinc-700/50 dark:shadow-button-curved-default-dark dark:hover:bg-zinc-600/80 dark:hover:shadow-button-curved-pressed-dark dark:active:bg-zinc-600/80 dark:active:shadow-button-curved-pressed-dark dark:focus:bg-zinc-600/80 dark:focus:shadow-button-curved-pressed-dark dark:border-0 backdrop-blur-sm transition-all">
+                    <i class="ri-home-line text-lg"></i>
+                </button>
+                <button onclick="window.location.href='/messenger'" title="Go to messages" class="text-gray-500 hover:text-green-400 dark:text-gray-400 border-2 inline-flex items-center mr-4 last-of-type:mr-0 p-2.5 border-transparent bg-gray-200/50 shadow-button-flat-nopressed hover:border-2 hover:shadow-button-flat-pressed focus:opacity-100 focus:outline-none active:border-2 active:shadow-button-flat-pressed font-medium rounded-full text-sm text-center dark:bg-zinc-700/50 dark:shadow-button-curved-default-dark dark:hover:bg-zinc-600/80 dark:hover:shadow-button-curved-pressed-dark dark:active:bg-zinc-600/80 dark:active:shadow-button-curved-pressed-dark dark:focus:bg-zinc-600/80 dark:focus:shadow-button-curved-pressed-dark dark:border-0 backdrop-blur-sm transition-all">
+                    <i class="ri-message-3-line text-lg"></i>
+                </button>
+                <button title="View notifications" class="text-gray-500 hover:text-purple-400 dark:text-gray-400 border-2 inline-flex items-center mr-4 last-of-type:mr-0 p-2.5 border-transparent bg-gray-200/50 shadow-button-flat-nopressed hover:border-2 hover:shadow-button-flat-pressed focus:opacity-100 focus:outline-none active:border-2 active:shadow-button-flat-pressed font-medium rounded-full text-sm text-center dark:bg-zinc-700/50 dark:shadow-button-curved-default-dark dark:hover:bg-zinc-600/80 dark:hover:shadow-button-curved-pressed-dark dark:active:bg-zinc-600/80 dark:active:shadow-button-curved-pressed-dark dark:focus:bg-zinc-600/80 dark:focus:shadow-button-curved-pressed-dark dark:border-0 backdrop-blur-sm transition-all">
+                    <i class="ri-notification-line text-lg"></i>
+                </button>
+                <button title="Your profile" class="text-white bg-gradient-to-r from-blue-500 to-purple-600 border-2 inline-flex items-center mr-4 last-of-type:mr-0 p-2.5 border-transparent shadow-button-flat-nopressed hover:border-2 hover:shadow-button-flat-pressed focus:opacity-100 focus:outline-none active:border-2 active:shadow-button-flat-pressed font-medium rounded-full text-sm text-center dark:shadow-button-curved-default-dark dark:hover:shadow-button-curved-pressed-dark dark:active:shadow-button-curved-pressed-dark dark:focus:shadow-button-curved-pressed-dark dark:border-0 backdrop-blur-sm transition-all">
+                    <i class="ri-user-line text-lg"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add fade-in animation to elements
+            const elements = document.querySelectorAll('.fade-in');
+            elements.forEach((el, index) => {
+                el.style.animationDelay = `${index * 0.1}s`;
+            });
+
+            // Modal functionality with GSAP
+            const editProfileBtn = document.getElementById('edit-profile-btn');
+            const editModal = document.getElementById('edit-modal');
+            const modalContent = document.getElementById('modal-content');
+            const closeModalBtn = document.getElementById('close-modal-btn');
+            const cancelBtn = document.getElementById('cancel-btn');
+
+            const profilePicInput = document.getElementById('profile-pic');
+            const profilePreview = document.getElementById('profile-preview');
+            const coverPhotoInput = document.getElementById('cover-photo');
+            const coverPreview = document.getElementById('cover-preview');
+
+            // GSAP timeline for modal animation
+            const tl = gsap.timeline({ paused: true });
+            tl.to(editModal, {
+                duration: 0.3,
+                autoAlpha: 1,
+                ease: "power2.inOut",
+            }).to(modalContent, { 
+                duration: 0.3, 
+                scale: 1, 
+                opacity: 1, 
+                ease: "back.out(1.7)" 
+            }, "-=0.2");
+
+            // Open modal function
+            const openModal = () => {
+                editModal.classList.remove('hidden');
+                tl.play();
+                document.body.style.overflow = 'hidden';
+            };
+
+            // Close modal function
+            const closeModal = () => {
+                tl.reverse();
+                setTimeout(() => {
+                    if (!tl.isActive()) {
+                        editModal.classList.add('hidden');
+                        document.body.style.overflow = 'auto';
+                    }
+                }, 500);
+            };
+
+            // Modal event listeners
+            if (editProfileBtn) {
+                editProfileBtn.addEventListener('click', openModal);
+            }
+            if (closeModalBtn) {
+                closeModalBtn.addEventListener('click', closeModal);
+            }
+            if (cancelBtn) {
+                cancelBtn.addEventListener('click', closeModal);
+            }
+
+            // Close on backdrop click
+            if (editModal) {
+                editModal.addEventListener('click', (e) => {
+                    if (e.target === editModal) closeModal();
+                });
+            }
+
+            // Close on Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !editModal.classList.contains('hidden')) {
+                    closeModal();
+                }
+            });
+
+            // Image preview functionality
+            const createPreview = (input, preview) => {
+                if (input) {
+                    input.addEventListener('change', (event) => {
+                        const file = event.target.files[0];
+                        if (file) {
+                            const reader = new FileReader();
+                            reader.onload = (e) => {
+                                preview.src = e.target.result;
+                            };
+                            reader.readAsDataURL(file);
+                        }
+                    });
+                }
+            };
+
+            createPreview(profilePicInput, profilePreview);
+            createPreview(coverPhotoInput, coverPreview);
+
+            // Tab functionality
+            const tabs = document.querySelectorAll('[id$="-tab"]');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Remove active state from all tabs
+                    tabs.forEach(t => {
+                        t.classList.remove('bg-gradient-to-r', 'from-blue-500/20', 'to-purple-500/20', 'text-white');
+                        t.classList.add('text-gray-400', 'hover:text-white', 'hover:bg-gray-800/30');
+                    });
+                    
+                    // Add active state to clicked tab
+                    this.classList.remove('text-gray-400', 'hover:text-white', 'hover:bg-gray-800/30');
+                    this.classList.add('bg-gradient-to-r', 'from-blue-500/20', 'to-purple-500/20', 'text-white');
+                    
+                    // Here you would typically load different content based on the tab
+                    console.log('Switched to:', this.id.replace('-tab', ''));
+                });
+            });
+
+            // Auto-resize textareas
+            const textareas = document.querySelectorAll('textarea');
+            textareas.forEach(textarea => {
+                textarea.addEventListener('input', function() {
+                    this.style.height = 'auto';
+                    this.style.height = this.scrollHeight + 'px';
+                });
+            });
+
+            // Form submission handling
+            const form = editModal?.querySelector('form');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    const submitBtn = form.querySelector('button[type="submit"]');
+                    if (submitBtn) {
+                        submitBtn.innerHTML = '<i class="ri-loader-4-line animate-spin mr-2"></i>Saving...';
+                        submitBtn.disabled = true;
+                    }
+                });
+            }
+
+            // Smooth scroll for better mobile experience
+            document.documentElement.style.scrollBehavior = 'smooth';
+
+            // Add touch feedback for mobile
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach(button => {
+                button.addEventListener('touchstart', function() {
+                    this.style.transform = 'scale(0.95)';
+                }, { passive: true });
+                
+                button.addEventListener('touchend', function() {
+                    this.style.transform = '';
+                }, { passive: true });
+            });
+
+            // Intersection Observer for animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all posts for scroll animations
+            const posts = document.querySelectorAll('article');
+            posts.forEach(post => {
+                post.style.opacity = '0';
+                post.style.transform = 'translateY(30px)';
+                post.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+                observer.observe(post);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<div class="relative">
+    <div class="h-48 sm:h-56 md:h-64 lg:h-72 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600">
+            <img
+                class="w-full h-full object-cover opacity-80 mix-blend-overlay"
+                src="<%= user.coverPhoto || 'https://images.unsplash.com/photo-1504805572947-34fad45aed93?q=80&w=2070&auto=format&fit=crop' %>"
+                alt="Cover Photo"
+            />
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+    </div>
+    
+    <div class="px-4 sm:px-6 lg:px-8 -mt-12 relative z-10">
+        <div class="glass-effect rounded-2xl p-6 sm:p-8 fade-in">
+            <div class="flex flex-col sm:flex-row items-start sm:items-end space-y-4 sm:space-y-0 sm:space-x-6">
+                <div class="relative">
+                    <div class="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full p-1 bg-gradient-to-r from-blue-500 to-purple-600">
+                        <img
+                            class="w-full h-full rounded-full object-cover bg-gray-800"
+                            src="<%= user.profilePic || 'https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500' %>"
+                            alt="Profile Picture"
+                        />
+                    </div>
+                    <div class="absolute -bottom-1 -right-1 w-8 h-8 bg-green-500 rounded-full border-4 border-gray-900 flex items-center justify-center">
+                        <div class="w-2 h-2 bg-white rounded-full"></div>
+                    </div>
+                </div>
+                
+                <div class="flex-1 min-w-0">
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                        <div class="mb-4 sm:mb-0">
+                            <h1 class="text-2xl sm:text-3xl font-bold text-white mb-1">
+                                <%= user.fullName || user.username %>
+                            </h1>
+                            <p class="text-gray-400 text-sm sm:text-base mb-2">
+                                @<%= user.username.toLowerCase().replace(/\s/g, '_') %>
+                            </p>
+                            <div class="flex items-center space-x-4 text-sm text-gray-400">
+                                <% if(user.location) { %>
+                                    <div class="flex items-center space-x-1">
+                                        <i class="ri-map-pin-line text-xs"></i>
+                                        <span><%= user.location %></span>
+                                    </div>
+                                <% } %>
+                                <div class="flex items-center space-x-1">
+                                    <i class="ri-calendar-line text-xs"></i>
+                                    <span>Joined <%= new Date(user.createdAt).toLocaleString('default', { month: 'long', year: 'numeric' }) %></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button
+                            id="edit-profile-btn"
+                            class="bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium px-6 py-2.5 rounded-xl hover:from-blue-600 hover:to-purple-700 transition-all transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+                        >
+                            <i class="ri-edit-line mr-2"></i>
+                            Edit Profile
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <% if(user.bio) { %>
+            <div class="mt-6 pt-6 border-t border-gray-700/30">
+                <p class="text-gray-300 leading-relaxed text-sm sm:text-base">
+                    <%= user.bio %>
+                </p>
+            </div>
+            <% } %>
+        </div>
+    </div>
+</div>

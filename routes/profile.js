@@ -14,6 +14,8 @@ router.get("/", isLoggedIn, async (req, res) => {
       .populate({
         path: "posts",
         options: { sort: { createdAt: -1 } },
+        // Fix: Populate the 'user' field within each post
+        populate: { path: 'user' }
       })
       .populate("followers")
       .populate("following");

@@ -1,11 +1,15 @@
-<div class="bg-zinc-800 p-5 rounded-2xl shadow-lg">
-    <h3 class="text-xl font-bold text-white mb-4">Trending Topics</h3>
+<div class="glass-effect rounded-2xl p-6 hover-lift fade-in">
+    <h2 class="text-lg font-semibold mb-4 text-gray-200">Trending</h2>
     <div class="space-y-3">
         <% trending.forEach(topic => { %>
-            <div>
-                <p class="font-semibold text-indigo-400 hover:underline cursor-pointer">#<%= topic.name %></p>
-                <p class="text-sm text-zinc-400"><%= topic.posts %> posts</p>
+            <div class="cursor-pointer hover:bg-gray-800/30 p-2 rounded-lg transition-colors -mx-2">
+                <p class="text-sm text-gray-500">Trending</p>
+                <p class="font-medium text-gray-200">#<%= topic.name %></p>
+                <p class="text-sm text-gray-500"><%= topic.posts %> posts</p>
             </div>
         <% }) %>
     </div>
+    <button class="w-full mt-4 text-blue-400 text-sm font-medium hover:text-blue-300 transition-colors">
+        Show more
+    </button>
 </div>

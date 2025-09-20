@@ -7,93 +7,97 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="/css/style.css" />
     <link
       href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
       rel="stylesheet"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-    />
-    <style>
-      body {
-        font-family: "Inter", sans-serif;
-      }
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #1e293b;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #475569;
-        border-radius: 10px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #64748b;
-      }
-    </style>
+    <link rel="stylesheet" href="/css/style.css" />
   </head>
-  <body class="bg-zinc-950 text-slate-300">
-  <div id="app-wrapper">
+  <body
+    class="bg-gradient-to-br from-gray-900 via-gray-900 to-black text-gray-100 min-h-screen"
+  >
     <%- include('components/_navbar') %>
 
-    <main class="container mx-auto px-4 lg:px-8 py-8">
-      <div class="grid grid-cols-12 gap-8">
-        <div class="col-span-12 lg:col-span-8">
-
-          <form action="/createpost/create" method="POST" class="bg-zinc-900 p-6 rounded-xl shadow-lg mb-6">
-            <div class="mb-4">
-              <label for="text" class="block text-slate-300 font-semibold mb-2">
-                Write your post
-              </label>
-              <textarea
-                id="text"
-                name="caption"
-                rows="6"
-                class="w-full px-4 py-3 bg-zinc-800 border border-zinc-700 rounded-lg text-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
-                placeholder="What's on your mind?"
-                required
-              ></textarea>
+    <main class="pt-20 pb-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div class="lg:col-span-2 space-y-6">
+            <div class="glass-effect rounded-2xl p-6 hover-lift fade-in">
+              <h2 class="text-lg font-semibold mb-4 text-gray-200">
+                Share your thoughts
+              </h2>
+              <form
+                action="/createpost/create"
+                method="POST"
+                class="space-y-4"
+              >
+                <div class="relative">
+                  <textarea
+                    name="caption"
+                    rows="4"
+                    class="w-full bg-gray-800/50 border border-gray-700/50 rounded-xl px-4 py-3 text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-transparent resize-none transition-all"
+                    placeholder="What's on your mind today?"
+                    required
+                  ></textarea>
+                </div>
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center space-x-3">
+                    <button
+                      type="button"
+                      class="flex items-center justify-center w-9 h-9 rounded-lg bg-gray-800/50 hover:bg-gray-700/50 transition-colors group"
+                    >
+                      <i
+                        class="ri-image-line text-gray-400 group-hover:text-blue-400 transition-colors"
+                      ></i>
+                    </button>
+                    <button
+                      type="button"
+                      class="flex items-center justify-center w-9 h-9 rounded-lg bg-gray-800/50 hover:bg-gray-700/50 transition-colors group"
+                    >
+                      <i
+                        class="ri-emotion-line text-gray-400 group-hover:text-yellow-400 transition-colors"
+                      ></i>
+                    </button>
+                  </div>
+                  <button
+                    type="submit"
+                    class="bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium px-6 py-2.5 rounded-xl hover:from-blue-600 hover:to-purple-700 transition-all transform hover:scale-105"
+                  >
+                    Share
+                  </button>
+                </div>
+              </form>
             </div>
-            <button
-              type="submit"
-              class="bg-blue-500 text-white font-semibold px-6 py-2 rounded-lg hover:bg-blue-600 transition-colors duration-200"
-            >
-              Post
-            </button>
-          </form>
-          <div class="space-y-6">
-            <% if(posts.length === 0) { %>
-              <p class="text-zinc-400">You haven't posted anything yet.</p>
-            <% } %> 
-            <% posts.forEach(post => { %>
-              <% if(post.image) { %>
-                <%- include('components/_image_posts', { post: post }) %>
-              <% } else { %>
-                <%- include('components/_text_posts', { post: post }) %>
-              <% } %>
-            <% }) %>
-          </div>
-        </div>
 
-        <aside class="col-span-12 lg:col-span-4">
-          <div class="sticky top-24 space-y-6">
+            <div class="space-y-6" id="posts-container">
+              <% if(posts.length === 0) { %>
+                <div class="text-center py-12 fade-in" id="empty-state">
+                  <div class="w-20 h-20 mx-auto mb-4 bg-gray-800 rounded-full flex items-center justify-center">
+                    <i class="ri-chat-3-line text-2xl text-gray-500"></i>
+                  </div>
+                  <h3 class="text-lg font-medium text-gray-300 mb-2">No posts yet</h3>
+                  <p class="text-gray-500">Share your first thought to get started!</p>
+                </div>
+              <% } %>
+              <% posts.forEach(post => { %>
+                <%- include('components/_post_card_new', { post: post }) %>
+              <% }) %>
+            </div>
+          </div>
+
+          <aside class="lg:col-span-1 space-y-6">
             <%- include('components/_who_to_follow', { users: users, currentUser: currentUser }) %>
             <%- include('components/_trending', { trending: trending }) %>
-          </div>
-        </aside>
+          </aside>
+        </div>
       </div>
-
-      <%- include('components/_pop_links') %>
     </main>
-  </div>
-  <script src="/js/script.js"></script>
-</body>
 
+    <%- include('components/_pop_links') %>
+    <script src="/js/script.js"></script>
+  </body>
 </html>

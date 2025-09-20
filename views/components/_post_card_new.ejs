@@ -1,0 +1,48 @@
+<article class="glass-effect rounded-2xl p-6 hover-lift fade-in">
+    <div class="flex items-start space-x-4">
+        <a href="/profile" class="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center flex-shrink-0">
+            <img src="<%= post.user.profilePic || 'https://placehold.co/48x48/7c3aed/ffffff?text=U' %>" alt="User avatar" class="w-full h-full rounded-full object-cover">
+        </a>
+        <div class="flex-1 min-w-0">
+            <div class="flex items-center space-x-2 mb-2">
+                <h3 class="font-semibold text-gray-200"><%= post.user.fullName || post.user.username %></h3>
+                <span class="text-gray-500 text-sm">@<%= post.user.username.toLowerCase().replace(/\s/g, '_') %></span>
+                <span class="text-gray-600 text-sm">·</span>
+                <span class="text-gray-500 text-sm"><%= new Date(post.createdAt).toLocaleString() %></span>
+            </div>
+            <p class="text-gray-300 leading-relaxed mb-4">
+                <%= post.caption %>
+            </p>
+            <% if (post.image) { %>
+                <div class="rounded-xl overflow-hidden mb-4">
+                    <img src="<%= post.image %>" alt="Post image" class="w-full h-auto object-cover" />
+                </div>
+            <% } %>
+            <div class="flex items-center space-x-6">
+                <button class="flex items-center space-x-2 text-gray-500 hover:text-blue-400 transition-colors group">
+                    <div class="w-8 h-8 rounded-full group-hover:bg-blue-500/10 flex items-center justify-center transition-colors">
+                        <i class="ri-message-3-line text-sm"></i>
+                    </div>
+                    <span class="text-sm"><%= post.comments.length %></span>
+                </button>
+                <button class="flex items-center space-x-2 text-gray-500 hover:text-green-400 transition-colors group">
+                    <div class="w-8 h-8 rounded-full group-hover:bg-green-500/10 flex items-center justify-center transition-colors">
+                        <i class="ri-repeat-line text-sm"></i>
+                    </div>
+                    <span class="text-sm"><%= post.shares || 0 %></span>
+                </button>
+                <button class="flex items-center space-x-2 text-gray-500 hover:text-red-400 transition-colors group">
+                    <div class="w-8 h-8 rounded-full group-hover:bg-red-500/10 flex items-center justify-center transition-colors">
+                        <i class="ri-heart-line text-sm"></i>
+                    </div>
+                    <span class="text-sm"><%= post.likes.length %></span>
+                </button>
+                <button class="flex items-center space-x-2 text-gray-500 hover:text-blue-400 transition-colors group">
+                    <div class="w-8 h-8 rounded-full group-hover:bg-blue-500/10 flex items-center justify-center transition-colors">
+                        <i class="ri-share-line text-sm"></i>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+</article>
