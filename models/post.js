@@ -4,15 +4,19 @@ const postSchema = new mongoose.Schema({
   caption: {
     type: String,
     trim: true,
-    maxlength: 2200
+    maxlength: 2200 // insta caption limit
   },
+  // We're making the image field optional by removing 'required: true'
   image: {
-    type: String,
-    required: true
+    type: String, // AWS, Cloudinary ya server ka URL
+    default: null
+  },
+  videoUrl: {
+    type: String // optional, agar video post h
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    ref: "User", // post kisne banaya
     required: true
   },
   likes: [
@@ -24,11 +28,17 @@ const postSchema = new mongoose.Schema({
   comments: [
     {
       user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-      username: { type: String }, // store username for easy rendering
-      comment: { type: String, required: true },
+      text: { type: String, required: true },
       createdAt: { type: Date, default: Date.now }
     }
   ],
+  tags: [String], // #hashtag support
+  mentions: [
+    { type: mongoose.Schema.Types.ObjectId, ref: "User" } // @mentions
+  ],
+  location: {
+    type: String // optional location/tag
+  },
   createdAt: {
     type: Date,
     default: Date.now

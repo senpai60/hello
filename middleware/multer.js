@@ -18,14 +18,17 @@ const storage = multer.diskStorage({
             const folder = 'uploads/coverPhotos'
             ensureFolderExists(folder)
             cb(null,folder)
+        } else if (file.fieldname === 'image') {
+            const folder = 'uploads/posts';
+            ensureFolderExists(folder);
+            cb(null, folder);
         }
     },
     filename:function(req,file,cb){
         const ext = path.extname(file.originalname)
         cb(null,file.fieldname+'-' + Date.now() + ext)
     }
-
-})
+});
 
 // File filter (optional)
 const fileFilter = (req, file, cb) => {
@@ -42,7 +45,8 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({
     storage,
     fileFilter,
-    limits: { fileSize: 5 * 1024 * 1024 } // 5MB max
+    // Increase the file size limit to 20MB (20 * 1024 * 1024 bytes)
+    limits: { fileSize: 20 * 1024 * 1024 } 
 });
 
 module.exports = upload;
