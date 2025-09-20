@@ -10,6 +10,8 @@ router.get('/', async (req, res) => {
         const users = await User.find();
         const currentUser = res.locals.user;
         const trending = trendingData;
+        // Add this line to log the posts data
+        console.log(posts);
 
         res.render('index', { posts, users, currentUser, trending });
     } catch (error) {

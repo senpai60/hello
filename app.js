@@ -58,6 +58,7 @@ const homeRouter = require("./routes/home");
 const profileRouter = require("./routes/profile");
 const authRouter = require("./routes/auth");
 const createPostRouter = require("./routes/createpost");
+const messengerRouter = require("./routes/messenger");
 
 
 
@@ -65,6 +66,7 @@ app.use("/", homeRouter);
 app.use("/profile", profileRouter);
 app.use("/auth", authRouter);
 app.use("/createpost", createPostRouter);
+app.use("/messenger", messengerRouter);
 
 // Static files
 

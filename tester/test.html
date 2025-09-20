@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plato - Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+    <style>
+        body { font-family: "Inter", sans-serif; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #374151; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #4b5563; }
+        
+        .glass-effect {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .hover-lift {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-to-br from-gray-900 via-gray-900 to-black text-gray-100 min-h-screen">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass-effect border-b border-gray-800/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-sm">P</span>
+                    </div>
+                    <span class="text-xl font-semibold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                        Plato
+                    </span>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-6">
+                    <button class="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors">
+                        <i class="ri-home-line text-lg"></i>
+                        <span class="font-medium">Home</span>
+                    </button>
+                    <button class="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors">
+                        <i class="ri-search-line text-lg"></i>
+                        <span class="font-medium">Explore</span>
+                    </button>
+                    <button class="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors">
+                        <i class="ri-notification-line text-lg"></i>
+                        <span class="font-medium">Notifications</span>
+                    </button>
+                </div>
+                
+                <div class="flex items-center space-x-3">
+                    <button class="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gray-700 transition-colors">
+                        <i class="ri-user-line text-gray-300"></i>
+                    </button>
+                    <button class="md:hidden w-8 h-8 flex items-center justify-center">
+                        <i class="ri-menu-line text-gray-300 text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-20 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                
+                <!-- Main Feed -->
+                <div class="lg:col-span-2 space-y-6">
+                    
+                    <!-- Create Post -->
+                    <div class="glass-effect rounded-2xl p-6 hover-lift fade-in">
+                        <h2 class="text-lg font-semibold mb-4 text-gray-200">Share your thoughts</h2>
+                        <form action="/createpost/create" method="POST" class="space-y-4">
+                            <div class="relative">
+                                <textarea
+                                    name="caption"
+                                    rows="4"
+                                    class="w-full bg-gray-800/50 border border-gray-700/50 rounded-xl px-4 py-3 text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-transparent resize-none transition-all"
+                                    placeholder="What's on your mind today?"
+                                    required
+                                ></textarea>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-3">
+                                    <button type="button" class="flex items-center justify-center w-9 h-9 rounded-lg bg-gray-800/50 hover:bg-gray-700/50 transition-colors group">
+                                        <i class="ri-image-line text-gray-400 group-hover:text-blue-400 transition-colors"></i>
+                                    </button>
+                                    <button type="button" class="flex items-center justify-center w-9 h-9 rounded-lg bg-gray-800/50 hover:bg-gray-700/50 transition-colors group">
+                                        <i class="ri-emotion-line text-gray-400 group-hover:text-yellow-400 transition-colors"></i>
+                                    </button>
+                                </div>
+                                <button
+                                    type="submit"
+                                    class="bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium px-6 py-2.5 rounded-xl hover:from-blue-600 hover:to-purple-700 transition-all transform hover:scale-105"
+                                >
+                                    Share
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Posts Feed -->
+                    <div class="space-y-6" id="posts-container">
+                        <!-- Sample Post 1 -->
+                        <article class="glass-effect rounded-2xl p-6 hover-lift fade-in">
+                            <div class="flex items-start space-x-4">
+                                <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <span class="text-white font-semibold text-sm">JD</span>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center space-x-2 mb-2">
+                                        <h3 class="font-semibold text-gray-200">John Doe</h3>
+                                        <span class="text-gray-500 text-sm">@johndoe</span>
+                                        <span class="text-gray-600 text-sm">·</span>
+                                        <span class="text-gray-500 text-sm">2h</span>
+                                    </div>
+                                    <p class="text-gray-300 leading-relaxed mb-4">
+                                        Just finished reading an amazing book on philosophy. The way ancient thinkers approached complex problems still resonates today. What's everyone reading lately? 📚
+                                    </p>
+                                    <div class="flex items-center space-x-6">
+                                        <button class="flex items-center space-x-2 text-gray-500 hover:text-blue-400 transition-colors group">
+                                            <div class="w-8 h-8 rounded-full group-hover:bg-blue-500/10 flex items-center justify-center transition-colors">
+                                                <i class="ri-message-3-line text-sm"></i>
+                                            </div>
+                                            <span class="text-sm">12</span>
+                                        </button>
+                                        <button class="flex items-center space-x-2 text-gray-500 hover:text-green-400 transition-colors group">
+                                            <div class="w-8 h-8 rounded-full group-hover:bg-green-500/10 flex items-center justify-center transition-colors">
+                                                <i class="ri-repeat-line text-sm"></i>
+                                            </div>
+                                            <span class="text-sm">5</span>
+                                        </button>
+                                        <button class="flex items-center space-x-2 text-gray-500 hover:text-red-400 transition-colors group">
+                                            <div class="w-8 h-8 rounded-full group-hover:bg-red-500/10 flex items-center justify-center transition-colors">
+                                                <i class="ri-heart-line text-sm"></i>
+                                            </div>
+                                            <span class="text-sm">24</span>
+                                        </button>
+                                        <button class="flex items-center space-x-2 text-gray-500 hover:text-blue-400 transition-colors group">
+                                            <div class="w-8 h-8 rounded-full group-hover:bg-blue-500/10 flex items-center justify-center transition-colors">
+                                                <i class="ri-share-line text-sm"></i>
+                                            </div>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Sample Post 2 -->
+                        <article class="glass-effect rounded-2xl p-6 hover-lift fade-in">
+                            <div class="flex items-start space-x-4">
+                                <div class="w-12 h-12 bg-gradient-to-r from-green-500 to-teal-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <span class="text-white font-semibold text-sm">AS</span>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center space-x-2 mb-2">
+                                        <h3 class="font-semibold text-gray-200">Alice Smith</h3>
+                                        <span class="text-gray-500 text-sm">@alicesmith</span>
+                                        <span class="text-gray-600 text-sm">·</span>
+                                        <span class="text-gray-500 text-sm">4h</span>
+                                    </div>
+                                    <p class="text-gray-300 leading-relaxed mb-4">
+                                        Beautiful sunset today! Sometimes the simple moments are the most profound. Nature has a way of putting everything in perspective. ✨
+                                    </p>
+                                    <div class="rounded-xl overflow-hidden mb-4">
+                                        <div class="w-full h-64 bg-gradient-to-br from-orange-400 via-pink-500 to-purple-600 flex items-center justify-center">
+                                            <i class="ri-image-line text-white text-4xl opacity-50"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center space-x-6">
+                                        <button class="flex items-center space-x-2 text-gray-500 hover:text-blue-400 transition-colors group">
+                                            <div class="w-8 h-8 rounded-full group-hover:bg-blue-500/10 flex items-center justify-center transition-colors">
+                                                <i class="ri-message-3-line text-sm"></i>
+                                            </div>
+                                            <span class="text-sm">8</span>
+                                        </button>
+                                        <button class="flex items-center space-x-2 text-gray-500 hover:text-green-400 transition-colors group">
+                                            <div class="w-8 h-8 rounded-full group-hover:bg-green-500/10 flex items-center justify-center transition-colors">
+                                                <i class="ri-repeat-line text-sm"></i>
+                                            </div>
+                                            <span class="text-sm">3</span>
+                                        </button>
+                                        <button class="flex items-center space-x-2 text-gray-500 hover:text-red-400 transition-colors group">
+                                            <div class="w-8 h-8 rounded-full group-hover:bg-red-500/10 flex items-center justify-center transition-colors">
+                                                <i class="ri-heart-line text-sm"></i>
+                                            </div>
+                                            <span class="text-sm">42</span>
+                                        </button>
+                                        <button class="flex items-center space-x-2 text-gray-500 hover:text-blue-400 transition-colors group">
+                                            <div class="w-8 h-8 rounded-full group-hover:bg-blue-500/10 flex items-center justify-center transition-colors">
+                                                <i class="ri-share-line text-sm"></i>
+                                            </div>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Empty State -->
+                        <div class="text-center py-12 fade-in" id="empty-state" style="display: none;">
+                            <div class="w-20 h-20 mx-auto mb-4 bg-gray-800 rounded-full flex items-center justify-center">
+                                <i class="ri-chat-3-line text-2xl text-gray-500"></i>
+                            </div>
+                            <h3 class="text-lg font-medium text-gray-300 mb-2">No posts yet</h3>
+                            <p class="text-gray-500">Share your first thought to get started!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <aside class="lg:col-span-1 space-y-6">
+                    
+                    <!-- Who to Follow -->
+                    <div class="glass-effect rounded-2xl p-6 hover-lift fade-in">
+                        <h2 class="text-lg font-semibold mb-4 text-gray-200">Discover People</h2>
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center">
+                                        <span class="text-white font-semibold text-xs">MW</span>
+                                    </div>
+                                    <div>
+                                        <p class="font-medium text-gray-200">Mike Wilson</p>
+                                        <p class="text-sm text-gray-500">@mikewilson</p>
+                                    </div>
+                                </div>
+                                <button class="px-4 py-1.5 bg-blue-600/20 text-blue-400 rounded-lg text-sm font-medium hover:bg-blue-600/30 transition-colors border border-blue-600/30">
+                                    Follow
+                                </button>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
+                                        <span class="text-white font-semibold text-xs">SJ</span>
+                                    </div>
+                                    <div>
+                                        <p class="font-medium text-gray-200">Sarah Johnson</p>
+                                        <p class="text-sm text-gray-500">@sarahjohnson</p>
+                                    </div>
+                                </div>
+                                <button class="px-4 py-1.5 bg-blue-600/20 text-blue-400 rounded-lg text-sm font-medium hover:bg-blue-600/30 transition-colors border border-blue-600/30">
+                                    Follow
+                                </button>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-10 h-10 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full flex items-center justify-center">
+                                        <span class="text-white font-semibold text-xs">RK</span>
+                                    </div>
+                                    <div>
+                                        <p class="font-medium text-gray-200">Robert Kim</p>
+                                        <p class="text-sm text-gray-500">@robertkim</p>
+                                    </div>
+                                </div>
+                                <button class="px-4 py-1.5 bg-blue-600/20 text-blue-400 rounded-lg text-sm font-medium hover:bg-blue-600/30 transition-colors border border-blue-600/30">
+                                    Follow
+                                </button>
+                            </div>
+                        </div>
+                        <button class="w-full mt-4 text-blue-400 text-sm font-medium hover:text-blue-300 transition-colors">
+                            Show more
+                        </button>
+                    </div>
+
+                    <!-- Trending Topics -->
+                    <div class="glass-effect rounded-2xl p-6 hover-lift fade-in">
+                        <h2 class="text-lg font-semibold mb-4 text-gray-200">Trending</h2>
+                        <div class="space-y-3">
+                            <div class="cursor-pointer hover:bg-gray-800/30 p-2 rounded-lg transition-colors -mx-2">
+                                <p class="text-sm text-gray-500">Trending in Technology</p>
+                                <p class="font-medium text-gray-200">#WebDevelopment</p>
+                                <p class="text-sm text-gray-500">12.3K posts</p>
+                            </div>
+                            <div class="cursor-pointer hover:bg-gray-800/30 p-2 rounded-lg transition-colors -mx-2">
+                                <p class="text-sm text-gray-500">Trending</p>
+                                <p class="font-medium text-gray-200">#Philosophy</p>
+                                <p class="text-sm text-gray-500">8.7K posts</p>
+                            </div>
+                            <div class="cursor-pointer hover:bg-gray-800/30 p-2 rounded-lg transition-colors -mx-2">
+                                <p class="text-sm text-gray-500">Trending in Art</p>
+                                <p class="font-medium text-gray-200">#DigitalArt</p>
+                                <p class="text-sm text-gray-500">5.2K posts</p>
+                            </div>
+                            <div class="cursor-pointer hover:bg-gray-800/30 p-2 rounded-lg transition-colors -mx-2">
+                                <p class="text-sm text-gray-500">Trending</p>
+                                <p class="font-medium text-gray-200">#Minimalism</p>
+                                <p class="text-sm text-gray-500">3.9K posts</p>
+                            </div>
+                        </div>
+                        <button class="w-full mt-4 text-blue-400 text-sm font-medium hover:text-blue-300 transition-colors">
+                            Show more
+                        </button>
+                    </div>
+
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <!-- Floating Bottom Navigation Bar -->
+    <div class="fixed left-1/2 bottom-4 -translate-x-1/2 z-[1000] flex space-x-3">
+        <div class="flex bg-white w-fit px-1.25 py-1.25 shadow-box-up rounded-2xl dark:bg-zinc-800 dark:shadow-box-dark-out glass-effect">
+            <div class="dark:shadow-buttons-box-dark rounded-2xl w-full px-1.5 py-1.5 md:px-3 md:py-3">
+                <button
+                    onclick="window.location.href='/'"
+                    title="Go to the home page"
+                    class="text-gray-500 hover:text-blue-400 dark:text-gray-400 border-2 inline-flex items-center mr-4 last-of-type:mr-0 p-2.5 border-transparent bg-gray-200/50 shadow-button-flat-nopressed hover:border-2 hover:shadow-button-flat-pressed focus:opacity-100 focus:outline-none active:border-2 active:shadow-button-flat-pressed font-medium rounded-full text-sm text-center dark:bg-zinc-700/50 dark:shadow-button-curved-default-dark dark:hover:bg-zinc-600/80 dark:hover:shadow-button-curved-pressed-dark dark:active:bg-zinc-600/80 dark:active:shadow-button-curved-pressed-dark dark:focus:bg-zinc-600/80 dark:focus:shadow-button-curved-pressed-dark dark:border-0 backdrop-blur-sm transition-all"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+                    </svg>
+                </button>
+
+                <button
+                    onclick="window.location.href='/messenger'"
+                    title="Go to messages"
+                    class="text-gray-500 hover:text-green-400 dark:text-gray-400 border-2 inline-flex items-center mr-4 last-of-type:mr-0 p-2.5 border-transparent bg-gray-200/50 shadow-button-flat-nopressed hover:border-2 hover:shadow-button-flat-pressed focus:opacity-100 focus:outline-none active:border-2 active:shadow-button-flat-pressed font-medium rounded-full text-sm text-center dark:bg-zinc-700/50 dark:shadow-button-curved-default-dark dark:hover:bg-zinc-600/80 dark:hover:shadow-button-curved-pressed-dark dark:active:bg-zinc-600/80 dark:active:shadow-button-curved-pressed-dark dark:focus:bg-zinc-600/80 dark:focus:shadow-button-curved-pressed-dark dark:border-0 backdrop-blur-sm transition-all"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+
+                <button
+                    title="View notifications"
+                    class="text-gray-500 hover:text-purple-400 dark:text-gray-400 border-2 inline-flex items-center mr-4 last-of-type:mr-0 p-2.5 border-transparent bg-gray-200/50 shadow-button-flat-nopressed hover:border-2 hover:shadow-button-flat-pressed focus:opacity-100 focus:outline-none active:border-2 active:shadow-button-flat-pressed font-medium rounded-full text-sm text-center dark:bg-zinc-700/50 dark:shadow-button-curved-default-dark dark:hover:bg-zinc-600/80 dark:hover:shadow-button-curved-pressed-dark dark:active:bg-zinc-600/80 dark:active:shadow-button-curved-pressed-dark dark:focus:bg-zinc-600/80 dark:focus:shadow-button-curved-pressed-dark dark:border-0 backdrop-blur-sm transition-all"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 12.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
+                    </svg>
+                </button>
+
+                <button
+                    id="createPostBtn"
+                    title="Create new post"
+                    class="text-white bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 border-2 inline-flex items-center mr-4 last-of-type:mr-0 p-2.5 border-transparent shadow-button-flat-nopressed hover:border-2 hover:shadow-button-flat-pressed focus:opacity-100 focus:outline-none active:border-2 active:shadow-button-flat-pressed font-medium rounded-full text-sm text-center dark:shadow-button-curved-default-dark dark:hover:shadow-button-curved-pressed-dark dark:active:shadow-button-curved-pressed-dark dark:focus:shadow-button-curved-pressed-dark dark:border-0 backdrop-blur-sm transition-all transform hover:scale-105"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Post Modal -->
+    <div id="createPostModal" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-[1001] flex items-center justify-center p-4">
+        <div class="glass-effect bg-white/10 dark:bg-zinc-800/90 rounded-2xl p-6 w-full max-w-2xl shadow-2xl transition-all transform-gpu max-h-[85vh] overflow-y-auto border border-gray-700/30">
+            <!-- Modal Header -->
+            <div class="flex justify-between items-center mb-6 sticky top-0 glass-effect p-4 -m-4 rounded-t-2xl z-10">
+                <h2 class="text-2xl font-bold text-white">Create new post</h2>
+                <button
+                    id="closeModalBtn"
+                    class="text-gray-400 hover:text-white p-2 rounded-full hover:bg-gray-700/50 transition-all"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Post Creation Form -->
+            <form action="/createpost/create" method="post" class="space-y-6" enctype="multipart/form-data">
+                <!-- Image Preview Section -->
+                <div id="imagePreviewContainer" class="w-full h-64 bg-gray-800/50 border border-gray-700/50 rounded-xl flex items-center justify-center overflow-hidden backdrop-blur-sm">
+                    <p id="imagePlaceholder" class="text-gray-400 flex flex-col items-center">
+                        <i class="ri-image-line text-4xl mb-2"></i>
+                        Image preview
+                    </p>
+                </div>
+                
+                <!-- File Input -->
+                <div>
+                    <label for="imageUpload" class="block text-sm font-medium text-gray-300 mb-2">
+                        Upload Image
+                    </label>
+                    <input
+                        type="file"
+                        id="imageUpload"
+                        name="image"
+                        accept="image/*"
+                        class="w-full text-sm text-gray-400 file:mr-4 file:py-3 file:px-6 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-gray-700/50 file:text-gray-300 hover:file:bg-gray-600/50 file:backdrop-blur-sm transition-all"
+                    />
+                </div>
+
+                <!-- Caption Field -->
+                <div>
+                    <label for="caption" class="block text-sm font-medium text-gray-300 mb-2">
+                        Caption
+                    </label>
+                    <textarea
+                        id="caption"
+                        name="caption"
+                        rows="4"
+                        placeholder="What's on your mind?"
+                        class="block w-full rounded-xl border border-gray-700/50 bg-gray-800/50 backdrop-blur-sm p-4 text-sm text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-transparent resize-none transition-all"
+                    ></textarea>
+                </div>
+
+                <!-- Tag People Field -->
+                <div>
+                    <label for="addPeople" class="block text-sm font-medium text-gray-300 mb-2">
+                        Tag people
+                    </label>
+                    <input
+                        type="text"
+                        id="addPeople"
+                        name="tagged_people"
+                        placeholder="Tag people (e.g., @username)"
+                        class="block w-full rounded-xl border border-gray-700/50 bg-gray-800/50 backdrop-blur-sm p-4 text-sm text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-transparent transition-all"
+                    />
+                </div>
+
+                <!-- Share Button -->
+                <div class="flex justify-end space-x-3 pt-4">
+                    <button
+                        type="button"
+                        id="cancelBtn"
+                        class="px-6 py-3 rounded-xl font-medium text-gray-300 bg-gray-700/50 hover:bg-gray-600/50 focus:outline-none focus:ring-2 focus:ring-gray-500/50 backdrop-blur-sm transition-all"
+                    >
+                        Cancel
+                    </button>
+                    <button
+                        type="submit"
+                        class="px-8 py-3 rounded-xl font-semibold text-white bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transform hover:scale-105 transition-all"
+                    >
+                        Share Post
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Enhanced interactions
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add fade-in animation to elements
+            const elements = document.querySelectorAll('.fade-in');
+            elements.forEach((el, index) => {
+                el.style.animationDelay = `${index * 0.1}s`;
+            });
+
+            // Modal functionality
+            const createPostBtn = document.getElementById('createPostBtn');
+            const createPostModal = document.getElementById('createPostModal');
+            const closeModalBtn = document.getElementById('closeModalBtn');
+            const cancelBtn = document.getElementById('cancelBtn');
+            const imageUpload = document.getElementById('imageUpload');
+            const imagePreviewContainer = document.getElementById('imagePreviewContainer');
+            const imagePlaceholder = document.getElementById('imagePlaceholder');
+
+            // Open modal
+            if (createPostBtn) {
+                createPostBtn.addEventListener('click', function() {
+                    createPostModal.classList.remove('hidden');
+                    document.body.style.overflow = 'hidden';
+                });
+            }
+
+            // Close modal function
+            function closeModal() {
+                createPostModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+                // Reset form
+                const form = createPostModal.querySelector('form');
+                if (form) form.reset();
+                // Reset image preview
+                imagePreviewContainer.innerHTML = '<p id="imagePlaceholder" class="text-gray-400 flex flex-col items-center"><i class="ri-image-line text-4xl mb-2"></i>Image preview</p>';
+            }
+
+            // Close modal events
+            if (closeModalBtn) {
+                closeModalBtn.addEventListener('click', closeModal);
+            }
+            if (cancelBtn) {
+                cancelBtn.addEventListener('click', closeModal);
+            }
+
+            // Close on backdrop click
+            if (createPostModal) {
+                createPostModal.addEventListener('click', function(e) {
+                    if (e.target === createPostModal) {
+                        closeModal();
+                    }
+                });
+            }
+
+            // Close on Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && !createPostModal.classList.contains('hidden')) {
+                    closeModal();
+                }
+            });
+
+            // Image preview functionality
+            if (imageUpload) {
+                imageUpload.addEventListener('change', function(e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            imagePreviewContainer.innerHTML = `<img src="${e.target.result}" alt="Preview" class="w-full h-full object-cover rounded-lg">`;
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+            }
+
+            // Auto-resize textareas
+            const textareas = document.querySelectorAll('textarea');
+            textareas.forEach(textarea => {
+                textarea.addEventListener('input', function() {
+                    this.style.height = 'auto';
+                    this.style.height = this.scrollHeight + 'px';
+                });
+            });
+
+            // Form validation
+            const forms = document.querySelectorAll('form');
+            forms.forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    const textareas = form.querySelectorAll('textarea[required]');
+                    let isValid = true;
+                    
+                    textareas.forEach(textarea => {
+                        if (textarea.value.trim() === '') {
+                            e.preventDefault();
+                            textarea.focus();
+                            isValid = false;
+                        }
+                    });
+                    
+                    if (isValid && form.closest('#createPostModal')) {
+                        // Add loading state to submit button
+                        const submitBtn = form.querySelector('button[type="submit"]');
+                        if (submitBtn) {
+                            submitBtn.innerHTML = '<i class="ri-loader-4-line animate-spin mr-2"></i>Sharing...';
+                            submitBtn.disabled = true;
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

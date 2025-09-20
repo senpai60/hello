@@ -63,9 +63,9 @@ router.post(
       }
 
       if (req.files["profilePic"]) {
-        // Delete the old profile picture if it exists and is not the default
+        // Correct path to the uploads folder at the project root
         if (user.profilePic && user.profilePic !== "default-avatar.png") {
-          const oldProfilePicPath = path.join(__dirname, '..', 'public', 'uploads', 'profilePics', user.profilePic.split('/').pop());
+          const oldProfilePicPath = path.join(__dirname, '..', 'uploads', 'profilePics', user.profilePic.split('/').pop());
           fs.unlink(oldProfilePicPath, (err) => {
             if (err) {
               console.error("Failed to delete old profile picture:", err);
@@ -78,7 +78,7 @@ router.post(
       if (req.files["coverPhoto"]) {
         // Add similar deletion logic for cover photo if needed
         if (user.coverPhoto && user.coverPhoto !== "default-avatar.png") {
-          const oldCoverPhotoPath = path.join(__dirname, '..', 'public', 'uploads', 'coverPhotos', user.coverPhoto.split('/').pop());
+          const oldCoverPhotoPath = path.join(__dirname, '..', 'uploads', 'coverPhotos', user.coverPhoto.split('/').pop());
           fs.unlink(oldCoverPhotoPath, (err) => {
             if (err) {
               console.error("Failed to delete old cover photo:", err);

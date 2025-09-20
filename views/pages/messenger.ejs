@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plato Messages</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0c0a09; /* bg-zinc-950 */
+            color: #d1d5db; /* text-slate-300 */
+        }
+        .scrollbar-hidden::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hidden {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .chat-list-container, .message-area {
+            display: none;
+        }
+        @media (min-width: 768px) {
+            .chat-list-container, .message-area {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body class="h-screen flex flex-col">
+
+    <!-- Navbar -->
+    <header class="bg-zinc-900/80 backdrop-blur-sm sticky top-0 z-50 border-b border-zinc-700">
+        <nav class="container mx-auto px-4 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="/" class="flex items-center space-x-2">
+                        <svg class="h-8 w-8 text-indigo-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.5-6.027c0-1.15-.39-2.236-1.055-3.136A8.987 8.987 0 0012 11.55a8.987 8.987 0 00-7.445 4.337c-.666.9-1.055 1.986-1.055 3.136A9.004 9.004 0 0012 21zm-5-9.75h10"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3c2.755 0 5.198.832 7.035 2.184a.75.75 0 01-.22.22A8.967 8.967 0 0012 5.056a8.967 8.967 0 00-6.815.348.75.75 0 01-.22-.22C6.802 3.832 9.245 3 12 3z"/>
+                        </svg>
+                        <span class="text-2xl font-bold text-white">Plato</span>
+                    </a>
+                </div>
+                <!-- Login/Logout & Profile -->
+                <div class="flex items-center space-x-4">
+                    <a href="/messages" class="text-slate-300 hover:text-white transition-colors">Messages</a>
+                    <a href="/auth/login" class="text-slate-300 hover:text-white transition-colors">Login</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="flex-1 flex overflow-hidden">
+        
+        <!-- Left Sidebar (Chat List) -->
+        <div id="chat-list" class="w-full md:w-1/3 lg:w-1/4 bg-zinc-900 border-r border-zinc-800 flex flex-col overflow-y-auto scrollbar-hidden">
+            <!-- User Profile Section -->
+            <div class="p-4 flex items-center space-x-3 border-b border-zinc-800">
+                <div class="relative">
+                    <img src="https://placehold.co/40x40/f43f5e/ffffff?text=U" alt="Your Profile" class="w-12 h-12 rounded-full object-cover">
+                    <span class="absolute bottom-0 right-0 h-3 w-3 bg-green-500 rounded-full border-2 border-zinc-900"></span>
+                </div>
+                <div class="flex-1">
+                    <h4 class="font-semibold text-white">You</h4>
+                    <p class="text-sm text-zinc-400">Online</p>
+                </div>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="p-4 border-b border-zinc-800">
+                <div class="relative">
+                    <i class="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500"></i>
+                    <input type="text" placeholder="Search contacts" class="w-full bg-zinc-800 text-slate-300 rounded-full py-2 pl-12 pr-4 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+            </div>
+
+            <div class="p-4 border-b border-zinc-800">
+                <h2 class="text-xl font-bold text-white">Chats</h2>
+            </div>
+            <!-- Dynamic Chat List Items -->
+            <div id="chat-list-container" class="flex-1 overflow-y-auto scrollbar-hidden">
+                <!-- Chat items will be added here dynamically -->
+            </div>
+        </div>
+
+        <!-- Right Main Content (Message Area) -->
+        <div id="message-area" class="flex-1 flex flex-col bg-zinc-950">
+            <!-- Header for the chat window -->
+            <div id="message-header" class="bg-zinc-900 p-4 border-b border-zinc-800 flex items-center justify-between sticky top-0 z-10 hidden">
+                <div class="flex items-center space-x-4">
+                    <button id="back-to-chats" class="md:hidden text-white">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <img id="chat-profile-pic" src="https://placehold.co/40x40/4f46e5/ffffff?text=U" alt="Profile" class="w-10 h-10 rounded-full object-cover">
+                    <h3 id="chat-username" class="text-lg font-semibold text-white">Username</h3>
+                </div>
+                <div class="flex items-center space-x-4 text-zinc-400">
+                    <button class="hover:text-white transition-colors">
+                        <i class="fa-solid fa-phone fa-lg"></i>
+                    </button>
+                    <button class="hover:text-white transition-colors">
+                        <i class="fa-solid fa-video fa-lg"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Message container -->
+            <div id="message-container" class="flex-1 p-4 overflow-y-auto space-y-4 scrollbar-hidden">
+                <!-- Messages will be injected here -->
+            </div>
+
+            <!-- Message Input -->
+            <div id="message-input-area" class="p-4 border-t border-zinc-800 bg-zinc-900 hidden">
+                <div class="flex items-end space-x-2">
+                    <div class="relative flex-1">
+                        <button class="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-white transition-colors">
+                            <i class="fa-solid fa-paperclip fa-lg"></i>
+                        </button>
+                        <textarea id="message-input" rows="1" placeholder="Type a message..." class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl py-2 pl-12 pr-4 text-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none overflow-y-hidden"></textarea>
+                    </div>
+                    <button id="send-button" class="bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full transition-colors flex items-center justify-center w-12 h-12">
+                        <i class="fa-solid fa-microphone"></i>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+    <script>
+        const chatData = [
+            { id: 1, name: 'Alice', lastMessage: 'Hey, are you there?', profilePic: 'https://placehold.co/40x40/f43f5e/ffffff?text=A', messages: [
+                { sender: 'Alice', text: 'Hey, are you there?', timestamp: '10:00 AM' },
+                { sender: 'You', text: 'Yeah, just saw your message.', timestamp: '10:01 AM' },
+                { sender: 'Alice', text: 'Great! I have some news.', timestamp: '10:02 AM' }
+            ]},
+            { id: 2, name: 'Bob', lastMessage: 'See you tomorrow!', profilePic: 'https://placehold.co/40x40/10b981/ffffff?text=B', messages: [
+                { sender: 'Bob', text: 'See you tomorrow!', timestamp: 'Yesterday' },
+                { sender: 'You', text: 'Sounds good!', timestamp: 'Yesterday' }
+            ]},
+            { id: 3, name: 'Charlie', lastMessage: 'Got it.', profilePic: 'https://placehold.co/40x40/3b82f6/ffffff?text=C', messages: [
+                { sender: 'Charlie', text: 'Got it.', timestamp: 'Yesterday' }
+            ]},
+            { id: 4, name: 'Dummy User', lastMessage: 'hello', profilePic: 'https://placehold.co/40x40/4f46e5/ffffff?text=D', messages: [
+                { sender: 'Dummy User', text: 'hii', timestamp: '9:00 AM' },
+                { sender: 'You', text: 'hello', timestamp: '9:01 AM' }
+            ]}
+        ];
+
+        const chatListContainer = document.getElementById('chat-list-container');
+        const messageArea = document.getElementById('message-area');
+        const messageHeader = document.getElementById('message-header');
+        const chatProfilePic = document.getElementById('chat-profile-pic');
+        const chatUsername = document.getElementById('chat-username');
+        const messageContainer = document.getElementById('message-container');
+        const messageInputArea = document.getElementById('message-input-area');
+        const messageInput = document.getElementById('message-input');
+        const sendButton = document.getElementById('send-button');
+        const backToChatsBtn = document.getElementById('back-to-chats');
+
+        let activeChatId = null;
+
+        function renderChatList() {
+            chatListContainer.innerHTML = '';
+            chatData.forEach(chat => {
+                const chatItem = document.createElement('div');
+                chatItem.className = 'p-4 flex items-center space-x-3 cursor-pointer hover:bg-zinc-800 transition-colors rounded-xl mx-2';
+                chatItem.setAttribute('data-chat-id', chat.id);
+                chatItem.innerHTML = `
+                    <img src="${chat.profilePic}" alt="${chat.name} profile" class="w-12 h-12 rounded-full object-cover">
+                    <div class="flex-1">
+                        <h4 class="font-semibold text-white">${chat.name}</h4>
+                        <p class="text-sm text-zinc-400 truncate">${chat.lastMessage}</p>
+                    </div>
+                `;
+                chatItem.addEventListener('click', () => openChat(chat.id));
+                chatListContainer.appendChild(chatItem);
+            });
+        }
+
+        function renderMessages(chat) {
+            messageContainer.innerHTML = '';
+            chat.messages.forEach(msg => {
+                const isSent = msg.sender === 'You';
+                const messageBubble = document.createElement('div');
+                messageBubble.className = `flex ${isSent ? 'justify-end' : 'justify-start'}`;
+                messageBubble.innerHTML = `
+                    <div class="max-w-xs md:max-w-sm lg:max-w-md p-3 rounded-xl ${isSent ? 'bg-blue-600 text-white rounded-br-none' : 'bg-zinc-800 text-slate-300 rounded-bl-none'}">
+                        <p>${msg.text}</p>
+                        <span class="text-xs ${isSent ? 'text-blue-200' : 'text-zinc-400'} block mt-1 text-right">${msg.timestamp}</span>
+                    </div>
+                `;
+                messageContainer.appendChild(messageBubble);
+            });
+            messageContainer.scrollTop = messageContainer.scrollHeight; // Scroll to bottom
+        }
+        
+        function openChat(chatId) {
+            activeChatId = chatId;
+            const chat = chatData.find(c => c.id === chatId);
+            if (!chat) return;
+            
+            chatProfilePic.src = chat.profilePic;
+            chatUsername.textContent = chat.name;
+            
+            renderMessages(chat);
+
+            messageHeader.classList.remove('hidden');
+            messageInputArea.classList.remove('hidden');
+            
+            // Hide chat list and show message area on mobile
+            if (window.innerWidth < 768) {
+                document.getElementById('chat-list').style.display = 'none';
+                document.getElementById('message-area').style.display = 'flex';
+            }
+        }
+
+        function sendMessage() {
+            if (activeChatId === null) return;
+            const text = messageInput.value.trim();
+            if (text === '') return;
+
+            const chat = chatData.find(c => c.id === activeChatId);
+            const newMessage = {
+                sender: 'You',
+                text: text,
+                timestamp: new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })
+            };
+            chat.messages.push(newMessage);
+            chat.lastMessage = text; // Update last message for chat list
+            messageInput.value = '';
+            renderMessages(chat);
+            renderChatList();
+        }
+        
+        // Dynamically change send button icon based on input
+        messageInput.addEventListener('input', () => {
+            if (messageInput.value.trim() === '') {
+                sendButton.innerHTML = '<i class="fa-solid fa-microphone"></i>';
+            } else {
+                sendButton.innerHTML = '<i class="fa-solid fa-paper-plane"></i>';
+            }
+        });
+
+        sendButton.addEventListener('click', sendMessage);
+        messageInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault(); // Prevents a new line
+                sendMessage();
+            }
+        });
+
+        backToChatsBtn.addEventListener('click', () => {
+            if (window.innerWidth < 768) {
+                document.getElementById('chat-list').style.display = 'flex';
+                document.getElementById('message-area').style.display = 'none';
+            }
+        });
+
+        // Initial render
+        renderChatList();
+
+    </script>
+</body>
+</html>
