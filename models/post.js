@@ -1,22 +1,22 @@
 const mongoose = require('mongoose');
 
 const postSchema = new mongoose.Schema({
-  caption: {
+  content: { // Renamed from 'caption' for wider use
     type: String,
     trim: true,
     maxlength: 2200 // insta caption limit
   },
-  // We're making the image field optional by removing 'required: true'
   image: {
-    type: String, // AWS, Cloudinary ya server ka URL
+    type: String, // AWS, Cloudinary or server URL
     default: null
   },
   videoUrl: {
-    type: String // optional, agar video post h
+    type: String, // optional
+    default: null
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User", // post kisne banaya
+    ref: "User",
     required: true
   },
   likes: [
@@ -28,16 +28,16 @@ const postSchema = new mongoose.Schema({
   comments: [
     {
       user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-      text: { type: String, required: true },
+      text: { type: String, required: true }, // 'text' from post.js, 'comment' from textpost.js - unified as 'text'
       createdAt: { type: Date, default: Date.now }
     }
   ],
-  tags: [String], // #hashtag support
+  tags: [String],
   mentions: [
-    { type: mongoose.Schema.Types.ObjectId, ref: "User" } // @mentions
+    { type: mongoose.Schema.Types.ObjectId, ref: "User" }
   ],
   location: {
-    type: String // optional location/tag
+    type: String
   },
   createdAt: {
     type: Date,

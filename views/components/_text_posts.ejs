@@ -1,0 +1,32 @@
+<div class="bg-zinc-800 p-6 rounded-2xl shadow-lg">
+  <div class="flex items-start space-x-4">
+    <img
+      src="<%= post.user.profilePic %>"
+      alt="User avatar"
+      class="w-12 h-12 rounded-full"
+    />
+    <div class="flex-1">
+      <div class="flex items-baseline space-x-2">
+        <h3 class="font-bold text-white"><%= post.user.username %></h3>
+        <span class="text-sm text-zinc-400"
+          ><%= new Date(post.createdAt).toLocaleString() %></span
+        >
+      </div>
+      <p class="mt-2"><%= post.caption %></p>
+      <div class="mt-4 flex justify-between text-zinc-400 max-w-sm">
+        <button class="hover:text-blue-500 transition-colors">
+          <i class="fa-regular fa-comment"></i> <%= post.comments.length %>
+        </button>
+        <button class="hover:text-green-500 transition-colors">
+          <i class="fa-solid fa-retweet"></i> <%= post.shares || 0 %>
+        </button>
+        <button class="hover:text-pink-500 transition-colors">
+          <i class="fa-regular fa-heart"></i> <%= post.likes.length %>
+        </button>
+        <button class="hover:text-sky-500 transition-colors">
+          <i class="fa-regular fa-bookmark"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

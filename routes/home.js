@@ -1,13 +1,22 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
+const Post = require("../models/post");
+const User = require("../models/user");
 
-// Public feed data
-const posts = require('../data/posts');
-const users = require('../data/users');
-const trending = require('../data/trending');
+router.get("/", async (req, res) => {
+  try {
+    const posts = await Post.find().populate("user").sort({ createdAt: -1 });
 
-router.get('/', (req, res) => {
-    res.render('index', { posts, users, trending });
+    const users = await User.find();
+
+    // Pass the current logged-in user to EJS
+    const currentUser = res.locals.user;
+
+    res.render("index", { posts, users, currentUser });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Server Error");
+  }
 });
 
 module.exports = router;

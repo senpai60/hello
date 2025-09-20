@@ -1,0 +1,46 @@
+<div class="bg-zinc-800 p-6 rounded-2xl shadow-lg">
+  <div class="flex items-start space-x-4">
+    <img
+      src="<%= post.user.profilePic ? post.user.profilePic : '/uploads/profilePics/default-avatar.png' %>"
+      alt="User avatar"
+      class="w-12 h-12 rounded-full object-cover"
+    />
+    <div class="flex-1">
+      <div class="flex items-baseline space-x-2">
+        <h3 class="font-bold text-white"><%= post.user.username %></h3>
+        <span class="text-sm text-zinc-400"
+          ><%= new Date(post.createdAt).toLocaleString() %></span
+        >
+      </div>
+      <p class="mt-2 text-zinc-300"><%= post.caption %></p>
+    </div>
+  </div>
+
+  <div class="mt-4 -mx-6 overflow-hidden rounded-xl">
+    <div class="w-full max-h-[400px] bg-zinc-700 flex items-center justify-center" style="aspect-ratio: 4 / 3;">
+      <img
+        src="<%= post.image %>"
+        alt="Post image"
+        class="w-full h-full object-cover"
+      />
+    </div>
+  </div>
+
+  <div class="mt-4 flex justify-between text-zinc-400 max-w-sm">
+    <button class="flex items-center space-x-1 hover:text-pink-400 transition-colors">
+      <i class="fa-regular fa-heart"></i>
+      <span><%= post.likes.length %></span>
+    </button>
+    <button class="flex items-center space-x-1 hover:text-blue-400 transition-colors">
+      <i class="fa-regular fa-comment"></i>
+      <span><%= post.comments.length %></span>
+    </button>
+    <button class="flex items-center space-x-1 hover:text-green-400 transition-colors">
+      <i class="fa-solid fa-retweet"></i>
+      <span><%= post.shares || 0 %></span>
+    </button>
+    <button class="hover:text-sky-400 transition-colors">
+      <i class="fa-regular fa-bookmark"></i>
+    </button>
+  </div>
+</div>

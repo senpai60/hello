@@ -3,11 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- GSAP for animations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="/css/style.css" />
@@ -15,7 +12,6 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <!-- Font Awesome for Icons -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
@@ -43,15 +39,11 @@
   </head>
 
   <body class="bg-zinc-950 text-slate-300">
-    <div id="pop-links-wrapper"><%- include('../components/_pop_links') %></div>
-
+    <%- include('../components/_pop_links.ejs')  %>
+    <div id="pop-links-wrapper"></div>
     <div id="app-wrapper">
-      
-      <%- include('../components/_navbar') %>
-
-      <!-- Main Content -->
+      <%- include('../components/_navbar.ejs')  %>
       <main class="container mx-auto px-4 lg:px-8 py-8">
-        <!-- Profile Header -->
         <header class="mb-8">
           <div class="relative">
             <img
@@ -88,57 +80,24 @@
         </header>
 
         <div class="grid grid-cols-12 gap-8">
-          <!-- User's Posts Column -->
           <div class="col-span-12 lg:col-span-8">
             <div class="space-y-6">
+              
               <% if(posts.length === 0) { %>
-              <p class="text-zinc-400">You haven't posted anything yet.</p>
-              <% } %> <% posts.forEach(post => { %>
-              <div class="bg-zinc-800 p-6 rounded-2xl shadow-lg">
-                <div class="flex items-start space-x-4">
-                  <img
-                    src="<%= user.profilePic %>"
-                    alt="User avatar"
-                    class="w-12 h-12 rounded-full"
-                  />
-                  <div class="flex-1">
-                    <div class="flex items-baseline space-x-2">
-                      <h3 class="font-bold text-white"><%= user.username %></h3>
-                      <span class="text-sm text-zinc-400"
-                        ><%= new Date(post.createdAt).toLocaleString() %></span
-                      >
-                    </div>
-                    <p class="mt-2"><%= post.content %></p>
-                    <div
-                      class="mt-4 flex justify-between text-zinc-400 max-w-sm"
-                    >
-                      <button class="hover:text-blue-500 transition-colors">
-                        <i class="fa-regular fa-comment"></i> <%=
-                        post.comments.length %>
-                      </button>
-                      <button class="hover:text-green-500 transition-colors">
-                        <i class="fa-solid fa-retweet"></i> <%= post.shares || 0
-                        %>
-                      </button>
-                      <button class="hover:text-pink-500 transition-colors">
-                        <i class="fa-regular fa-heart"></i> <%=
-                        post.likes.length %>
-                      </button>
-                      <button class="hover:text-sky-500 transition-colors">
-                        <i class="fa-regular fa-bookmark"></i>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                <p class="text-zinc-400">You haven't posted anything yet.</p>
+              <% } %> 
+              <% posts.forEach(post => { %>
+                <% if(post.image) { %>
+                  <%- include('../components/_image_posts', { post: post, user: user }) %>
+                <% } else { %>
+                  <%- include('../components/_text_posts', { post: post, user: user }) %>
+                <% } %>
               <% }); %>
             </div>
           </div>
 
-          <!-- Right Sidebar -->
           <aside class="col-span-12 lg:col-span-4">
             <div class="sticky top-24 space-y-6">
-              <!-- Profile About Card -->
               <div class="bg-zinc-800 p-6 rounded-2xl shadow-lg">
                 <h3 class="text-xl font-bold text-white mb-4">About</h3>
                 <p class="mb-4 text-zinc-300">
@@ -146,13 +105,13 @@
                 </p>
                 <ul class="space-y-3 text-zinc-400">
                   <li class="flex items-center space-x-3">
-                    <i class="fa-solid fa-location-dot w-4 text-center"></i
-                    ><span><%= user.location || 'Unknown' %></span>
+                    <i class="fa-solid fa-location-dot w-4 text-center"></i>
+                    <span><%= user.location || 'Unknown' %></span>
                   </li>
                   <% if(user.website){ %>
                   <li class="flex items-center space-x-3">
-                    <i class="fa-solid fa-link w-4 text-center"></i
-                    ><a
+                    <i class="fa-solid fa-link w-4 text-center"></i>
+                    <a
                       href="<%= user.website %>"
                       class="text-blue-400 hover:underline"
                       ><%= user.website %></a
@@ -160,8 +119,8 @@
                   </li>
                   <% } %>
                   <li class="flex items-center space-x-3">
-                    <i class="fa-regular fa-calendar w-4 text-center"></i
-                    ><span
+                    <i class="fa-regular fa-calendar w-4 text-center"></i>
+                    <span
                       >Joined <%= new
                       Date(user.createdAt).toLocaleString('default', { month:
                       'long', year: 'numeric' }) %></span
@@ -170,12 +129,10 @@
                 </ul>
                 <div class="mt-6 flex space-x-4 text-zinc-300">
                   <span><strong><%= user.stats.posts %></strong> Posts</span>
-                  <span
-                    ><strong><%= user.stats.followers %></strong>
+                  <span><strong><%= user.stats.followers %></strong>
                     Followers</span
                   >
-                  <span
-                    ><strong><%= user.stats.following %></strong>
+                  <span><strong><%= user.stats.following %></strong>
                     Following</span
                   >
                 </div>
@@ -186,7 +143,6 @@
       </main>
     </div>
 
-    <!-- Edit Profile Modal -->
     <div
       id="edit-modal"
       class="fixed inset-0 bg-black/70 flex items-center justify-center p-4 z-50 hidden"
@@ -346,7 +302,7 @@
         const closeModalBtn = document.getElementById("close-modal-btn");
         const cancelBtn = document.getElementById("cancel-btn");
 
-        const popLinksWrapper = document.getElementById("pop-links-wrapper"); // new
+        const popLinksWrapper = document.getElementById("pop-links-wrapper");
 
         const profilePicInput = document.getElementById("profile-pic");
         const profilePreview = document.getElementById("profile-preview");
@@ -363,18 +319,16 @@
           { duration: 0.3, scale: 1, opacity: 1, ease: "back.out(1.7)" },
           "-=0.2"
         );
-
         const openModal = () => {
           editModal.classList.remove("hidden");
           tl.play();
-          popLinksWrapper.style.display = "none"; // hide pop-links
+          popLinksWrapper.style.display = "none";
         };
-
         const closeModal = () => {
           tl.reverse();
           setTimeout(() => {
             if (!tl.isActive()) editModal.classList.add("hidden");
-            popLinksWrapper.style.display = "block"; // show pop-links
+            popLinksWrapper.style.display = "block";
           }, 500);
         };
 
@@ -384,7 +338,6 @@
         editModal.addEventListener("click", (e) => {
           if (e.target === editModal) closeModal();
         });
-
         const createPreview = (input, preview) => {
           input.addEventListener("change", (event) => {
             const file = event.target.files[0];

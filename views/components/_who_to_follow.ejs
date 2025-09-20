@@ -1,19 +1,25 @@
-<div class="bg-zinc-800 p-5 rounded-2xl shadow-lg">
-    <h3 class="text-xl font-bold text-white mb-4">Who to follow</h3>
-    <div class="space-y-4">
-        <% users.forEach(user => { %>
-            <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-3">
-                    <img src="<%= user.avatar %>" alt="<%= user.name %> avatar" class="w-10 h-10 rounded-full object-cover border-2 border-zinc-700">
-                    <div>
-                        <p class="font-semibold text-white"><%= user.name %></p>
-                        <p class="text-sm text-zinc-400">@<%= user.username %></p>
-                    </div>
-                </div>
-                <button class="bg-zinc-700 hover:bg-zinc-600 text-white font-semibold text-sm py-1.5 px-4 rounded-full transition-colors duration-200">
-                    Follow
-                </button>
+<div class="bg-zinc-900 p-6 rounded-xl shadow-lg">
+  <h3 class="text-xl font-bold text-white mb-4">Who to follow</h3>
+  <div class="space-y-4">
+    <% users.forEach(user => { %>
+      <% if (currentUser && user._id.toString() !== currentUser._id.toString()) { %>
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-3">
+            <img
+              src="<%= user.profilePic ? user.profilePic : '/uploads/profilePics/default-avatar.png' %>"
+              alt="Profile avatar"
+              class="w-10 h-10 rounded-full object-cover"
+            />
+            <div>
+              <p class="font-semibold text-white"><%= user.username %></p>
+              <p class="text-sm text-zinc-400">@<%= user.username.toLowerCase().replace(/\s/g, '_') %></p>
             </div>
-        <% }) %>
-    </div>
+          </div>
+          <button class="bg-blue-600 hover:bg-blue-500 text-white font-semibold py-1 px-4 rounded-full transition-colors">
+            Follow
+          </button>
+        </div>
+      <% } %>
+    <% }) %>
+  </div>
 </div>
