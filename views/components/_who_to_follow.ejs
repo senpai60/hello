@@ -1,30 +1,30 @@
 <div class="glass-effect rounded-2xl p-6 hover-lift fade-in">
-  <h2 class="text-lg font-semibold mb-4 text-gray-200">Discover People</h2>
-  <div class="space-y-4">
-    <% users.forEach(user => { %>
-      <% if (currentUser && user._id.toString() !== currentUser._id.toString()) { %>
-        <div class="flex items-center justify-between">
-          <div class="flex items-center space-x-3">
-            <a href="/profile">
-              <img
-                src="<%= user.profilePic ? user.profilePic : '/uploads/profilePics/default-avatar.png' %>"
-                alt="Profile avatar"
-                class="w-10 h-10 rounded-full object-cover"
-              />
-            </a>
-            <div>
-              <p class="font-medium text-gray-200"><%= user.username %></p>
-              <p class="text-sm text-gray-500">@<%= user.username.toLowerCase().replace(/\s/g, '_') %></p>
-            </div>
-          </div>
-          <button class="px-4 py-1.5 bg-blue-600/20 text-blue-400 rounded-lg text-sm font-medium hover:bg-blue-600/30 transition-colors border border-blue-600/30">
-            Follow
-          </button>
-        </div>
-      <% } %>
-    <% }) %>
-  </div>
-  <button class="w-full mt-4 text-blue-400 text-sm font-medium hover:text-blue-300 transition-colors">
-    Show more
-  </button>
+    <h2 class="text-lg font-semibold mb-4 text-gray-200">Discover People</h2>
+    <div class="space-y-4">
+        <% users.forEach(user => { %>
+            <% if (currentUser && user._id.toString() !== currentUser._id.toString()) { %>
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <a href="/profile/<%= user.username %>">
+                            <img
+                                src="<%= user.profilePic ? user.profilePic : '/uploads/profilePics/default-avatar.png' %>"
+                                alt="Profile avatar"
+                                class="w-10 h-10 rounded-full object-cover"
+                            />
+                        </a>
+                        <div>
+                            <p class="font-medium text-gray-200"><%= user.username %></p>
+                            <p class="text-sm text-gray-500">@<%= user.username.toLowerCase().replace(/\s/g, '_') %></p>
+                        </div>
+                    </div>
+                    <button class="px-4 py-1.5 bg-blue-600/20 text-blue-400 rounded-lg text-sm font-medium hover:bg-blue-600/30 transition-colors border border-blue-600/30">
+                        Follow
+                    </button>
+                </div>
+            <% } %>
+        <% }) %>
+    </div>
+    <button class="w-full mt-4 text-blue-400 text-sm font-medium hover:text-blue-300 transition-colors">
+        Show more
+    </button>
 </div>

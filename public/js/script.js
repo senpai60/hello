@@ -22,65 +22,69 @@ document.addEventListener('DOMContentLoaded', function() {
     const imagePreviewContainer = document.getElementById('imagePreviewContainer');
     const imagePlaceholder = document.getElementById('imagePlaceholder');
 
-    // GSAP timeline for modal animation
-    const tl = gsap.timeline({ paused: true });
-    tl.to(editModal, {
-        duration: 0.3,
-        autoAlpha: 1,
-        ease: "power2.inOut",
-    }).to(modalContent, {
-        duration: 0.3,
-        scale: 1,
-        opacity: 1,
-        ease: "back.out(1.7)"
-    }, "-=0.2");
+    // GSAP timeline for modal animation, only if the edit modal exists
+    if (editModal) {
+        const tl = gsap.timeline({ paused: true });
+        tl.to(editModal, {
+            duration: 0.3,
+            autoAlpha: 1,
+            ease: "power2.inOut",
+        }).to(modalContent, {
+            duration: 0.3,
+            scale: 1,
+            opacity: 1,
+            ease: "back.out(1.7)"
+        }, "-=0.2");
 
-
-    // Function to open a modal
-    const openModal = (modal) => {
-        modal.classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
-        if (modal === editModal) {
+        // Open modal function for edit modal
+        const openEditModal = () => {
+            editModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
             tl.play();
+        };
+
+        // Event listeners for edit modal
+        if (editProfileBtn) {
+            editProfileBtn.addEventListener('click', openEditModal);
+        }
+    }
+
+
+    // Function to open create post modal
+    const openCreatePostModal = () => {
+        if (createPostModal) {
+            createPostModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
         }
     };
-
-    // Function to close a modal
+    
+    // Function to close any modal
     const closeModal = (modal) => {
-        if (modal === editModal) {
-            tl.reverse();
-            setTimeout(() => {
-                if (!tl.isActive()) {
-                    modal.classList.add('hidden');
-                    document.body.style.overflow = 'auto';
-                }
-            }, 500);
-        } else {
-            modal.classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        }
+        modal.classList.add('hidden');
+        document.body.style.overflow = 'auto';
     };
 
     // Event listeners to open modals
     if (createPostBtn) {
-        createPostBtn.addEventListener('click', () => openModal(createPostModal));
+        createPostBtn.addEventListener('click', openCreatePostModal);
     }
-    if (editProfileBtn) {
-        editProfileBtn.addEventListener('click', () => openModal(editModal));
-    }
-
+    
     // Event listeners to close modals
     closeModalBtns.forEach(btn => {
         btn.addEventListener('click', (e) => {
             const modal = e.target.closest('.fixed');
-            closeModal(modal);
+            if (modal) {
+                closeModal(modal);
+            }
         });
     });
 
     cancelBtns.forEach(btn => {
         btn.addEventListener('click', (e) => {
             const modal = e.target.closest('.fixed');
-            closeModal(modal);
+            if (modal) {
+                closeModal(modal);
+            }
         });
     });
 
@@ -95,19 +99,24 @@ document.addEventListener('DOMContentLoaded', function() {
     if (editModal) {
         editModal.addEventListener('click', (e) => {
             if (e.target === editModal) {
-                closeModal(editModal);
+                // Since editModal has GSAP, we handle it separately
+                gsap.timeline({ paused: true }).to(editModal, { autoAlpha: 0, duration: 0.3 }).play();
+                document.body.style.overflow = 'auto';
             }
         });
     }
 
+
     // Close on Escape key
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
-            if (!createPostModal.classList.contains('hidden')) {
+            if (createPostModal && !createPostModal.classList.contains('hidden')) {
                 closeModal(createPostModal);
             }
-            if (!editModal.classList.contains('hidden')) {
-                closeModal(editModal);
+            if (editModal && !editModal.classList.contains('hidden')) {
+                // We handle the GSAP animated modal here as well
+                gsap.timeline({ paused: true }).to(editModal, { autoAlpha: 0, duration: 0.3 }).play();
+                document.body.style.overflow = 'auto';
             }
         }
     });
@@ -128,9 +137,18 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 
-    createPreview(profilePicInput, profilePreview);
-    createPreview(coverPhotoInput, coverPreview);
-    createPreview(imageUpload, imagePreviewContainer.querySelector('img'));
+    if (profilePicInput && profilePreview) {
+      createPreview(profilePicInput, profilePreview);
+    }
+    if (coverPhotoInput && coverPreview) {
+      createPreview(coverPhotoInput, coverPreview);
+    }
+    if (imageUpload && imagePreviewContainer) {
+      const img = document.createElement('img');
+      imagePreviewContainer.appendChild(img);
+      createPreview(imageUpload, img);
+    }
+
 
     // Auto-resize textareas
     const textareas = document.querySelectorAll('textarea');

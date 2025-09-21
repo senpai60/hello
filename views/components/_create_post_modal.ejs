@@ -1,0 +1,79 @@
+<div id="createPostModal" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-[1001] flex items-center justify-center p-4">
+    <div class="glass-effect bg-white/10 dark:bg-zinc-800/90 rounded-2xl p-6 w-full max-w-2xl shadow-2xl transition-all transform-gpu max-h-[85vh] overflow-y-auto border border-gray-700/30">
+        <div class="flex justify-between items-center mb-6 sticky top-0 glass-effect p-4 -m-4 rounded-t-2xl z-10">
+            <h2 class="text-2xl font-bold text-white">Create new post</h2>
+            <button
+                id="closeModalBtn"
+                class="text-gray-400 hover:text-white p-2 rounded-full hover:bg-gray-700/50 transition-all"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+
+        <form action="/createpost/create" method="post" class="space-y-6" enctype="multipart/form-data">
+            <div id="imagePreviewContainer" class="w-full h-64 bg-gray-800/50 border border-gray-700/50 rounded-xl flex items-center justify-center overflow-hidden backdrop-blur-sm">
+                <p id="imagePlaceholder" class="text-gray-400 flex flex-col items-center">
+                    <i class="ri-image-line text-4xl mb-2"></i>
+                    Image preview
+                </p>
+            </div>
+            
+            <div>
+                <label for="imageUpload" class="block text-sm font-medium text-gray-300 mb-2">
+                    Upload Image
+                </label>
+                <input
+                    type="file"
+                    id="imageUpload"
+                    name="image"
+                    accept="image/*"
+                    class="w-full text-sm text-gray-400 file:mr-4 file:py-3 file:px-6 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-gray-700/50 file:text-gray-300 hover:file:bg-gray-600/50 file:backdrop-blur-sm transition-all"
+                />
+            </div>
+
+            <div>
+                <label for="caption" class="block text-sm font-medium text-gray-300 mb-2">
+                    Caption
+                </label>
+                <textarea
+                    id="caption"
+                    name="caption"
+                    rows="4"
+                    placeholder="What's on your mind?"
+                    class="block w-full rounded-xl border border-gray-700/50 bg-gray-800/50 backdrop-blur-sm p-4 text-sm text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-transparent resize-none transition-all"
+                ></textarea>
+            </div>
+
+            <div>
+                <label for="addPeople" class="block text-sm font-medium text-gray-300 mb-2">
+                    Tag people
+                </label>
+                <input
+                    type="text"
+                    id="addPeople"
+                    name="tagged_people"
+                    placeholder="Tag people (e.g., @username)"
+                    class="block w-full rounded-xl border border-gray-700/50 bg-gray-800/50 backdrop-blur-sm p-4 text-sm text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-transparent transition-all"
+                />
+            </div>
+
+            <div class="flex justify-end space-x-3 pt-4">
+                <button
+                    type="button"
+                    id="cancelBtn"
+                    class="px-6 py-3 rounded-xl font-medium text-gray-300 bg-gray-700/50 hover:bg-gray-600/50 focus:outline-none focus:ring-2 focus:ring-gray-500/50 backdrop-blur-sm transition-all"
+                >
+                    Cancel
+                </button>
+                <button
+                    type="submit"
+                    class="px-8 py-3 rounded-xl font-semibold text-white bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transform hover:scale-105 transition-all"
+                >
+                    Share Post
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,12 +1,30 @@
-<div class="bg-zinc-800 p-4 rounded-2xl shadow-lg mb-6">
-    <textarea 
-        class="w-full bg-zinc-700 p-3 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:outline-none text-white transition" 
-        rows="3" 
-        placeholder="What's on your mind?"></textarea>
-    <div class="flex justify-end mt-3">
-        <button 
-            class="bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-2 px-5 rounded-lg transition-colors duration-200">
-            Post
-        </button>
-    </div>
+<div class="glass-effect rounded-2xl p-6 hover-lift fade-in">
+    <h2 class="text-lg font-semibold mb-4 text-gray-200">Share your thoughts</h2>
+    <form action="/createpost/create" method="POST" class="space-y-4">
+        <div class="relative">
+            <textarea
+                name="caption"
+                rows="4"
+                class="w-full bg-gray-800/50 border border-gray-700/50 rounded-xl px-4 py-3 text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-transparent resize-none transition-all"
+                placeholder="What's on your mind today?"
+                required
+            ></textarea>
+        </div>
+        <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <button type="button" class="flex items-center justify-center w-9 h-9 rounded-lg bg-gray-800/50 hover:bg-gray-700/50 transition-colors group">
+                    <i class="ri-image-line text-gray-400 group-hover:text-blue-400 transition-colors"></i>
+                </button>
+                <button type="button" class="flex items-center justify-center w-9 h-9 rounded-lg bg-gray-800/50 hover:bg-gray-700/50 transition-colors group">
+                    <i class="ri-emotion-line text-gray-400 group-hover:text-yellow-400 transition-colors"></i>
+                </button>
+            </div>
+            <button
+                type="submit"
+                class="bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium px-6 py-2.5 rounded-xl hover:from-blue-600 hover:to-purple-700 transition-all transform hover:scale-105"
+            >
+                Share
+            </button>
+        </div>
+    </form>
 </div>

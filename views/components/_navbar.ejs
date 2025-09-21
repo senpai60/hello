@@ -2,17 +2,33 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-16">
             <div class="flex items-center space-x-3">
-                <button onclick="history.back()" class="w-8 h-8 rounded-full bg-gray-800/50 flex items-center justify-center hover:bg-gray-700/50 transition-colors">
-                    <i class="ri-arrow-left-line text-gray-300"></i>
-                </button>
                 <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
                     <span class="text-white font-bold text-sm">P</span>
                 </div>
                 <a href="/" class="text-xl font-semibold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Plato</a>
             </div>
+            
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="/" class="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors">
+                    <i class="ri-home-line text-lg"></i>
+                    <span class="font-medium">Home</span>
+                </a>
+                <a href="/explore" class="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors">
+                    <i class="ri-search-line text-lg"></i>
+                    <span class="font-medium">Explore</span>
+                </a>
+                <a href="/notifications" class="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors">
+                    <i class="ri-notification-line text-lg"></i>
+                    <span class="font-medium">Notifications</span>
+                </a>
+            </div>
+            
             <div class="flex items-center space-x-3">
-                <button class="w-8 h-8 bg-gray-800/50 rounded-full flex items-center justify-center hover:bg-gray-700/50 transition-colors">
-                    <i class="ri-more-line text-gray-300"></i>
+                <a href="/profile" class="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gray-700 transition-colors">
+                    <i class="ri-user-line text-gray-300"></i>
+                </a>
+                <button class="md:hidden w-8 h-8 flex items-center justify-center">
+                    <i class="ri-menu-line text-gray-300 text-lg"></i>
                 </button>
             </div>
         </div>
